@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Card = ({ data, disable = false }) => {
   return (
     <Link
-      to={`/${data._id}`}
+      to={`/feedbacks/${data._id}`}
       className={`${
         disable ? "pointer-events-none" : null
       } w-full rounded-lg mt-5 bg-white grid grid-cols-card gap-10 p-6 transition transform hover:scale-105`}
