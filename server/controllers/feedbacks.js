@@ -1,11 +1,23 @@
 const Feedback = require("../models/Feedback");
 
 const getFeedbacks = (req, res) => {
-  Feedback.find()
-    .then((feedbacks) => res.json(feedbacks))
-    .catch((error) => {
-      res.status(404).json(error);
-    });
+  const { category } = req.query;
+  if (category) {
+    Feedback.find({ category })
+      .then((feedbacks) => {
+        res.json(feedbacks);
+      })
+      .catch((err) => {
+        res.status(404).json({ noFeedbacksFound: "noFeedbacksFound" });
+        console.log(err);
+      });
+  } else {
+    Feedback.find()
+      .then((feedbacks) => res.json(feedbacks))
+      .catch((error) => {
+        res.status(404).json(error);
+      });
+  }
 };
 
 const createFeedback = (req, res) => {
