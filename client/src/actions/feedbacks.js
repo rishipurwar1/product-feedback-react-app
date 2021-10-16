@@ -11,16 +11,27 @@ export const getFeedbacks = () => async (dispatch) => {
   }
 };
 
-// export const getExperiencesBySearch = (searchQuery) => async (dispatch) => {
-//   try {
-//     const {
-//       data: { data },
-//     } = await api.fetchExperiencesBySearch(searchQuery);
-//     dispatch({ type: "FETCH_EXPERIENCES_BY_SEARCH", payload: { data } });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const filterFeedbacks = (query) => async (dispatch) => {
+  try {
+    const { data } = await api.filterFeedbacks(query);
+    console.log(data);
+    dispatch({ type: "FETCH_ALL", payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const getFeedbacksBySearch = (query) => async (dispatch) => {
+  try {
+    const {
+      data: { data },
+    } = await api.fetchFeedbacksBySearch(query);
+    console.log(data);
+    dispatch({ type: "FETCH_FEEDBACKS_BY_SEARCH", payload: { data } });
+  } catch (error) {
+    console.log(error);
+  }
+};
 // export const getExperiencesByFilter = (searchQuery) => async (dispatch) => {
 //   console.log(searchQuery);
 //   try {
@@ -60,12 +71,12 @@ export const deleteFeedback = (id) => async (dispatch) => {
   }
 };
 
-// export const commentExperience = (value, id) => async (dispatch) => {
-//   try {
-//     const { data } = await api.comment(value, id);
-//     dispatch({ type: "COMMENT", payload: data });
-//     return data.comments;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
+export const commentFeedback = (value, id) => async (dispatch) => {
+  try {
+    const { data } = await api.comment(value, id);
+    dispatch({ type: "COMMENT", payload: data });
+    return data.comments;
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -12,11 +12,17 @@ API.interceptors.request.use((req) => {
 
 // experiences endpoints
 export const fetchFeedbacks = () => API.get("/feedbacks");
+export const filterFeedbacks = (query) =>
+  API.get(`/feedbacks?category=${query}`);
+export const fetchFeedbacksBySearch = (query) =>
+  API.get(`/feedbacks/search?query=${query}`);
 export const createFeedback = (newFeedback) =>
   API.post("/feedbacks", newFeedback);
 export const updateFeedback = (id, updatedFeedback) =>
   API.patch(`/feedbacks/${id}`, updatedFeedback);
 export const deleteFeedback = (id) => API.delete(`/feedbacks/${id}`);
+export const comment = (value, id) =>
+  API.post(`/feedbacks/${id}/comment`, { value });
 
 // auth endpoints
 export const signIn = (formData) => API.post("/user/signin", formData);

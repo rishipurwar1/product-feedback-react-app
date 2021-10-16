@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import iconSuggestion from "../../assets/imgs/icon-suggestions.svg";
 import iconPlus from "../../assets/imgs/icon-plus.svg";
-// import Modal from "./Modal";
+import Modal from "../helpers/Modal";
 
 const FeedbackHeader = ({
   openForm,
@@ -21,7 +21,7 @@ const FeedbackHeader = ({
     if (user?.result?.name) {
       setOpenForm(!openForm);
     } else {
-      setShowModal(true);
+      setShowModal(!showModal);
     }
   };
   return (
@@ -49,12 +49,12 @@ const FeedbackHeader = ({
         </button>
       </div>
 
-      {/* {showModal && (
+      {showModal && (
         <Modal
-          text="Please Log In first to add your interview experience"
+          text="Please Log In first to add a feedback"
           setShowModal={setShowModal}
         />
-      )} */}
+      )}
     </div>
   );
 };

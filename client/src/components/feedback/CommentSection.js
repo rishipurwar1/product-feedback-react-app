@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Avatar from "react-avatar";
 import { useDispatch } from "react-redux";
-// import { commentExperience } from "../../actions/experiences";
+import { commentFeedback } from "../../actions/feedbacks";
 
 const CommentSection = ({ data }) => {
   const [comments, setComments] = useState(data?.comments);
@@ -11,8 +11,7 @@ const CommentSection = ({ data }) => {
 
   const handleClick = async () => {
     const finalComment = `${user.result.name}: ${comment}`;
-    const newComments = await dispatch();
-    //   commentExperience(finalComment, data._id)
+    const newComments = await dispatch(commentFeedback(finalComment, data._id));
     setComments(newComments);
     setComment("");
   };
@@ -44,35 +43,35 @@ const CommentSection = ({ data }) => {
           })}
         </div>
       </div>
-      {/* {user?.result?.name && ( */}
-      <div className="w-full max-w-4xl rounded-lg mt-5 bg-white shadow-sm flex flex-col p-5">
-        <div className="">
-          <label
-            htmlFor="comment"
-            className="text-xl text-primary-dark font-semibold block"
+      {user?.result?.name && (
+        <div className="w-full max-w-4xl rounded-lg mt-5 bg-white shadow-sm flex flex-col p-5">
+          <div className="">
+            <label
+              htmlFor="comment"
+              className="text-xl text-primary-dark font-semibold block"
+            >
+              Add Comment
+            </label>
+            <textarea
+              name="comment"
+              id="comment"
+              cols="30"
+              rows="5"
+              placeholder="Type your comment here"
+              className="p-4 w-full mt-4 rounded-lg bg-primary-light text-secondary-dark outline-none focus:ring-1 focus:ring-tertiary-dark"
+              value={comment}
+              onChange={(e) => setComment(e.target.value)}
+            ></textarea>
+          </div>
+          <button
+            className="self-end px-5 py-3 rounded-lg bg-neutral text-white mt-2 text-sm"
+            disabled={!comment}
+            onClick={handleClick}
           >
-            Add Comment
-          </label>
-          <textarea
-            name="comment"
-            id="comment"
-            cols="30"
-            rows="5"
-            placeholder="Type your comment here"
-            className="p-4 w-full mt-4 rounded-lg bg-primary-light text-secondary-dark outline-none focus:ring-1 focus:ring-tertiary-dark"
-            value={comment}
-            onChange={(e) => setComment(e.target.value)}
-          ></textarea>
+            Post Comment
+          </button>
         </div>
-        <button
-          className="self-end px-5 py-3 rounded-lg bg-neutral text-white mt-2 text-sm"
-          disabled={!comment}
-          onClick={handleClick}
-        >
-          Post Comment
-        </button>
-      </div>
-      {/* )} */}
+      )}
     </>
   );
 };

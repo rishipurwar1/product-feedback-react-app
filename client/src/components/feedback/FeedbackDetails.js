@@ -3,15 +3,12 @@ import { useParams, Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Card from "../dashboard/Card";
 import CommentSection from "./CommentSection";
-// import Button from "../utilities/Button";
-// import CommentSection from "./CommentSection";
-// import AddOpportunity from "./AddOpportunity";
-// import Modal from "../opportunities/Modal";
-// import LoginCard from "../portal/LoginCard";
+import LoginCard from "../helpers/LoginCard";
+import Button from "../helpers/Button";
+import ActionModal from "../helpers/ActionModal";
 
 const FeedbackDetail = () => {
   const { id } = useParams();
-  console.log(id);
   const [showModal, setShowModal] = useState(false);
   const [openForm, setOpenForm] = useState(false);
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -19,7 +16,6 @@ const FeedbackDetail = () => {
   const feedback = useSelector((state) =>
     state.feedbacks.filter((feedback) => feedback._id === id)
   );
-  console.log(feedback);
   if (feedback.length > 0) {
     return (
       <div className="row-start-2 row-end-3 col-start-1 col-end-2 mx-auto w-3/5">
@@ -29,7 +25,7 @@ const FeedbackDetail = () => {
             Go back
           </Link>
           <div>
-            {/* <Button
+            <Button
               btnText="Edit"
               iconType="fas fa-edit"
               bgColor="bg-tertiary-dark"
@@ -40,21 +36,21 @@ const FeedbackDetail = () => {
               iconType="fas fa-trash-alt"
               bgColor="bg-tertiary-dark"
               handleClick={() => setShowModal(!showModal)}
-            /> */}
+            />
           </div>
         </div>
         <Card data={feedback[0]} disable />
         <CommentSection data={feedback[0]} />
-        {/* {!user?.result?.name && <LoginCard />} */}
-        {/* {showModal && (
-          <Modal
+        {!user?.result?.name && <LoginCard />}
+        {showModal && (
+          <ActionModal
             text="Are you sure you want to delete your interview experience?"
-            opportunityId={opportunity[0]._id}
+            feedbackId={feedback[0]._id}
             showModal={showModal}
             setShowModal={setShowModal}
           />
         )}
-        {openForm && (
+        {/* {openForm && (
           <AddOpportunity
             initialData={opportunity[0]}
             openForm={openForm}
