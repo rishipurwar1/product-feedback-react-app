@@ -1,9 +1,19 @@
 const Feedback = require("../models/Feedback");
 
 const getFeedbacks = (req, res) => {
-  const { category } = req.query;
-  if (category) {
+  if (req.query.category) {
+    const { category } = req.query;
     Feedback.find({ category })
+      .then((feedbacks) => {
+        res.json(feedbacks);
+      })
+      .catch((err) => {
+        res.status(404).json({ noFeedbacksFound: "noFeedbacksFound" });
+        console.log(err);
+      });
+  } else if (req.query.status) {
+    const { status } = req.query;
+    Feedback.find({ status })
       .then((feedbacks) => {
         res.json(feedbacks);
       })
@@ -16,6 +26,20 @@ const getFeedbacks = (req, res) => {
       .then((feedbacks) => res.json(feedbacks))
       .catch((error) => {
         res.status(404).json(error);
+      });
+  }
+};
+
+const getFeedbacksByStatus = (req, res) => {
+  const { status } = req.query;
+  if (status) {
+    Feedback.find({ status })
+      .then((feedbacks) => {
+        res.json(feedbacks);
+      })
+      .catch((err) => {
+        res.status(404).json({ noFeedbacksFound: "noFeedbacksFound" });
+        console.log(err);
       });
   }
 };
@@ -73,6 +97,7 @@ const commentFeedback = async (req, res) => {
 
 module.exports = {
   getFeedbacks,
+  getFeedbacksByStatus,
   searchFeedback,
   createFeedback,
   updateFeedback,

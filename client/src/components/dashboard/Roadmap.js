@@ -7,7 +7,7 @@ const Roadmap = () => {
       <div className="flex justify-between">
         <p className="inline font-bold text-lg text-primary-dark">Roadmap</p>
         <Link
-          to="/"
+          to="/roadmap"
           className="text-tertiary-dark transition underline hover:no-underline"
         >
           View

@@ -14,6 +14,15 @@ export const getFeedbacks = () => async (dispatch) => {
 export const filterFeedbacks = (query) => async (dispatch) => {
   try {
     const { data } = await api.filterFeedbacks(query);
+    dispatch({ type: "FETCH_ALL", payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const fetchFeedbacksByStatus = (query) => async (dispatch) => {
+  try {
+    const { data } = await api.fetchFeedbacksByStatus(query);
     console.log(data);
     dispatch({ type: "FETCH_ALL", payload: data });
   } catch (error) {
@@ -32,17 +41,6 @@ export const getFeedbacksBySearch = (query) => async (dispatch) => {
     console.log(error);
   }
 };
-// export const getExperiencesByFilter = (searchQuery) => async (dispatch) => {
-//   console.log(searchQuery);
-//   try {
-//     const {
-//       data: { data },
-//     } = await api.fetchExperiencesByFilter(searchQuery);
-//     dispatch({ type: "FETCH_EXPERIENCES_BY_FILTER", payload: { data } });
-//   } catch (error) {
-//     console.log(error);
-//   }
-// };
 
 export const createFeedback = (feedback) => async (dispatch) => {
   try {
