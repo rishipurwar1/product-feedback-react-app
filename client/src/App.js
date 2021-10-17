@@ -8,6 +8,7 @@ import {
 } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { Toaster } from "react-hot-toast";
 import { getFeedbacks } from "./actions/feedbacks";
 import Dashboard from "./components/dashboard/Dashboard";
 import FeedbackDetail from "./components/feedback/FeedbackDetails";
@@ -23,37 +24,68 @@ const App = () => {
     dispatch(getFeedbacks());
   }, [dispatch]);
   return (
-    <Router>
-      <div className="App grid md:grid-cols-1 grid-rows-mobile md:grid-rows-1 gap-16 md:gap-12 font-display bg-secondary-light">
-        <Switch>
-          <Route exact path="/">
-            <Redirect to="/feedbacks" />
-            <Dashboard />
-          </Route>
-          <Route exact path="/feedbacks">
-            <Dashboard />
-          </Route>
-          <Route exact path="/feedbacks/search">
-            <Dashboard />
-          </Route>
-          <Route path="/feedbacks/:id">
-            <FeedbackDetail />
-          </Route>
-          <Route path="/auth">
-            <AuthForm />
-          </Route>
-          <Route path="/create">
-            <CreateFeedback />
-          </Route>
-          <Route path="/edit/:id">
-            <UpdateFeedback />
-          </Route>
-          <Route path="/roadmap">
-            <Roadmap />
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <>
+      <Toaster
+        position="top-center"
+        gutter={8}
+        containerClassName=""
+        containerStyle={{}}
+        toastOptions={{
+          // Define default options
+          className: "",
+          duration: 5000,
+          style: {
+            background: "#ffffff",
+            color: "#3A4374",
+          },
+          // Default options for specific types
+          success: {
+            duration: 3000,
+            iconTheme: {
+              primary: "#4661E6",
+              secondary: "#ffffff",
+            },
+          },
+          error: {
+            iconTheme: {
+              primary: "#D73737",
+              secondary: "#ffffff",
+            },
+          },
+        }}
+      />
+      <Router>
+        <div className="App grid md:grid-cols-1 grid-rows-mobile md:grid-rows-1 gap-16 md:gap-12 font-display bg-secondary-light">
+          <Switch>
+            <Route exact path="/">
+              <Redirect to="/feedbacks" />
+              <Dashboard />
+            </Route>
+            <Route exact path="/feedbacks">
+              <Dashboard />
+            </Route>
+            <Route exact path="/feedbacks/search">
+              <Dashboard />
+            </Route>
+            <Route path="/feedbacks/:id">
+              <FeedbackDetail />
+            </Route>
+            <Route path="/auth">
+              <AuthForm />
+            </Route>
+            <Route path="/create">
+              <CreateFeedback />
+            </Route>
+            <Route path="/edit/:id">
+              <UpdateFeedback />
+            </Route>
+            <Route path="/roadmap">
+              <Roadmap />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
+    </>
   );
 };
 
