@@ -1,9 +1,10 @@
 import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { createFeedback, updateFeedback } from "../../actions/feedbacks";
 import iconNewFeedback from "../../assets/imgs/icon-new-feedback.svg";
+import loader from "../../assets/imgs/loader.svg";
 import Input from "../authForm/Input";
 import Label from "../authForm/Label";
 import Button from "../helpers/Button";
@@ -20,10 +21,14 @@ const CreateFeedback = ({ feedback }) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const formMethods = useForm();
-  const { handleSubmit, register, reset, formState: errors } = formMethods;
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors, isSubmitting },
+  } = formMethods;
   // get user profile from local storage
   const user = JSON.parse(localStorage.getItem("profile"));
-
   const onSubmit = async (data) => {
     if (feedback) {
       await dispatch(updateFeedback(feedback._id, data));
@@ -99,9 +104,9 @@ const CreateFeedback = ({ feedback }) => {
                 cols="30"
                 rows="5"
                 className={`${
-                  errors.errors.description?.type === "required"
+                  errors.description?.type === "required"
                     ? "focus:outline-none focus:border-red-500"
-                    : "focus:outline-none focus:border-tertiary-dark"
+                    : "focus:outline-none  focus:border-tertiary-dark"
                 } p-4 w-full rounded-lg bg-primary-light text-primary-dark font-bold text-xs border focus:outline-none border-gray-100`}
                 {...register("description", { required: true })}
               ></textarea>
@@ -115,9 +120,16 @@ const CreateFeedback = ({ feedback }) => {
               />
               <button
                 type="submit"
-                className="px-5 py-3 text-sm rounded-lg ml-2 bg-neutral text-white hover:bg-btn-hover"
+                disabled={isSubmitting}
+                className={`px-5 py-3 text-sm rounded-lg ml-2 bg-neutral text-white ${
+                  isSubmitting && "bg-btn-hover"
+                } hover:bg-btn-hover`}
               >
-                Add Feedback
+                {isSubmitting ? (
+                  <img src={loader} className="w-5 h-5" alt="loader" />
+                ) : (
+                  "Add Feedback"
+                )}
               </button>
             </div>
           </form>
