@@ -2,18 +2,22 @@ import React, { useState } from "react";
 import Avatar from "react-avatar";
 import { useDispatch } from "react-redux";
 import { commentFeedback } from "../../actions/feedbacks";
+import loader from "../../assets/imgs/loader.svg";
 
 const CommentSection = ({ data }) => {
   const [comments, setComments] = useState(data?.comments);
   const [comment, setComment] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const user = JSON.parse(localStorage.getItem("profile"));
   const dispatch = useDispatch();
 
   const handleClick = async () => {
+    setIsSubmitting(true);
     const finalComment = `${user.result.name}: ${comment}`;
     const newComments = await dispatch(commentFeedback(finalComment, data._id));
     setComments(newComments);
     setComment("");
+    setIsSubmitting(false);
   };
   return (
     <>
@@ -64,11 +68,17 @@ const CommentSection = ({ data }) => {
             ></textarea>
           </div>
           <button
-            className="self-end px-5 py-3 rounded-lg bg-neutral text-white mt-2 text-sm"
-            disabled={!comment}
+            className={`self-end px-5 py-3 rounded-lg bg-neutral text-white mt-2 text-sm ${
+              isSubmitting && "bg-btn-hover"
+            } hover:bg-btn-hover`}
+            disabled={isSubmitting}
             onClick={handleClick}
           >
-            Post Comment
+            {isSubmitting ? (
+              <img src={loader} className="w-5 h-5" alt="loader" />
+            ) : (
+              "Post Comment"
+            )}
           </button>
         </div>
       )}

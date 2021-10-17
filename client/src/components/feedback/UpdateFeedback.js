@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
 import { updateFeedback } from "../../actions/feedbacks";
 import iconEditFeedback from "../../assets/imgs/icon-edit-feedback.svg";
+import loader from "../../assets/imgs/loader.svg";
 import Input from "../authForm/Input";
 import Label from "../authForm/Label";
 import Button from "../helpers/Button";
@@ -27,6 +28,7 @@ const UpdateFeedback = () => {
   const { id } = useParams();
   const history = useHistory();
   const dispatch = useDispatch();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const formMethods = useForm();
   const {
     handleSubmit,
@@ -41,9 +43,11 @@ const UpdateFeedback = () => {
   );
 
   const onSubmit = async (data) => {
+    setIsSubmitting(true);
     if (feedback) {
       await dispatch(updateFeedback(id, data));
       history.push("/feedbacks");
+      setIsSubmitting(false);
       reset("", {
         keepValues: false,
       });
@@ -150,9 +154,16 @@ const UpdateFeedback = () => {
               />
               <button
                 type="submit"
-                className="px-5 py-3 text-sm rounded-lg ml-2 bg-neutral text-white hover:bg-btn-hover"
+                disabled={isSubmitting}
+                className={`px-5 py-3 text-sm rounded-lg ml-2 bg-neutral text-white ${
+                  isSubmitting && "bg-btn-hover"
+                } hover:bg-btn-hover`}
               >
-                Add Feedback
+                {isSubmitting ? (
+                  <img src={loader} className="w-5 h-5" alt="loader" />
+                ) : (
+                  "Update Feedback"
+                )}
               </button>
             </div>
           </form>

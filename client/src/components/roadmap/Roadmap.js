@@ -3,6 +3,9 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useSelector, useDispatch } from "react-redux";
 import uuid from "uuid/v4";
 import { getFeedbacks, updateFeedback } from "../../actions/feedbacks";
+import CategoryTag from "../helpers/CategoryTag";
+import CommentIcon from "../helpers/CommentIcon";
+import Upvote from "../helpers/Upvote";
 import RoadmapHeader from "./RoadmapHeader";
 
 const Roadmap = () => {
@@ -124,7 +127,7 @@ const Roadmap = () => {
               }
               return (
                 <div className="flex flex-col" key={columnId}>
-                  <h1 className="text-primary-dark font-bold">{column.name}</h1>
+                  <h1 className="text-primary-dark font-bold">{`${column.name} (${column.items.length})`}</h1>
                   <p className="text-secondary-dark text-sm">
                     {column.subTitle}
                   </p>
@@ -151,7 +154,7 @@ const Roadmap = () => {
                                         ref={provided.innerRef}
                                         {...provided.draggableProps}
                                         {...provided.dragHandleProps}
-                                        className={`p-4 mb-2 bg-white rounded-lg border-t-4 ${borderColor}`}
+                                        className={`p-4 mb-2 bg-white rounded-lg border-t-4 cursor-pointer ${borderColor}`}
                                       >
                                         <h2
                                           className={`text-primary-dark font-bold `}
@@ -161,6 +164,13 @@ const Roadmap = () => {
                                         <p className="text-secondary-dark text-sm">
                                           {item.description}
                                         </p>
+                                        <CategoryTag btnName={item.category} />
+                                        <div className="flex justify-between">
+                                          <Upvote upvotes={item.upvotes} />
+                                          <CommentIcon
+                                            comments={item.comments.length}
+                                          />
+                                        </div>
                                       </div>
                                     );
                                   }}

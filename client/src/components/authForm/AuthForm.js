@@ -7,11 +7,15 @@ import { useHistory } from "react-router";
 import { signin, signup } from "../../actions/auth";
 import { v4 as uuidv4 } from "uuid";
 import ErrorMessage from "../helpers/ErrorMessage";
+import loader from "../../assets/imgs/loader.svg";
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
   const formMethods = useForm();
-  const { handleSubmit } = formMethods;
+  const {
+    handleSubmit,
+    formState: { isSubmitting },
+  } = formMethods;
   const authData = useSelector((state) => state.auth.authData);
 
   const dispatch = useDispatch();
@@ -100,14 +104,21 @@ const AuthForm = () => {
               <ErrorMessage errorMessage={authData?.message} />
             </div>
 
-            <button className="bg-neutral text-white transition hover:bg-btn-hover px-4 py-3 w-full rounded-md font-bold mt-4 shadow-md">
-              {isLogin ? "Log In" : "Sign Up"}
+            <button
+              type="submit"
+              className={`text-white text-center transition hover:bg-btn-hover px-4 py-3 w-full rounded-md font-bold mt-4 shadow-md ${
+                isSubmitting ? "bg-btn-hover" : "bg-neutral"
+              }`}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? (
+                <img src={loader} className="w-5 h-5" alt="loader" />
+              ) : isLogin ? (
+                "Log In"
+              ) : (
+                "Sign Up"
+              )}
             </button>
-            <div className="flex items-center py-6">
-              <div className="w-1/2 h-px bg-white bg-opacity-40"></div>
-              <p className="text-white px-1 text-xs">OR</p>
-              <div className="w-1/2 h-px bg-white bg-opacity-40"></div>
-            </div>
           </form>
         </FormProvider>
       </div>
