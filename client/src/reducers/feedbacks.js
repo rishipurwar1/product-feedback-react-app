@@ -11,6 +11,10 @@ export default (feedbacks = [], action) => {
       return feedbacks.map((feedback) =>
         feedback._id === action.payload._id ? action.payload : feedback
       );
+    case "UPVOTE":
+      return feedbacks.map((feedback) =>
+        feedback._id === action.payload._id ? action.payload : feedback
+      );
     case "DELETE":
       return feedbacks.filter((feedback) => feedback._id !== action.payload);
     case "COMMENT":

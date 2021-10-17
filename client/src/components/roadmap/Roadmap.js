@@ -2,12 +2,7 @@ import React, { useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useSelector, useDispatch } from "react-redux";
 import uuid from "uuid/v4";
-import {
-  updateFeedback,
-  updateFeedbackByStatus,
-} from "../../actions/feedbacks";
-// import { fetchFeedbacksByStatus, getFeedbacks } from "../../actions/feedbacks";
-// import { fetchLiveFeatures } from "../../actions/liveFeatures";
+import { getFeedbacks, updateFeedback } from "../../actions/feedbacks";
 import RoadmapHeader from "./RoadmapHeader";
 
 const Roadmap = () => {
@@ -88,7 +83,6 @@ const Roadmap = () => {
         default:
           dispatch(updateFeedback(removed._id, { ...removed, status: "live" }));
       }
-      //   dispatch(updateFeedbackByStatus(removed._id));
     } else {
       const column = columns[source.droppableId];
       const copiedItems = [...column.items];
@@ -104,7 +98,10 @@ const Roadmap = () => {
     }
   };
 
-  console.log(plannedFeatures, inProgressFeatures, liveFeatures);
+  useEffect(() => {
+    dispatch(getFeedbacks());
+  }, [dispatch]);
+
   if (feedbacks.length > 0) {
     return (
       <div className="row-start-2 row-end-3 col-start-1 col-end-2 mx-auto">
