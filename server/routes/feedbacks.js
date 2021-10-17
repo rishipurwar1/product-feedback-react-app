@@ -7,6 +7,7 @@ const {
   deleteFeedback,
   searchFeedback,
   commentFeedback,
+  upvoteFeedback,
 } = require("../controllers/feedbacks");
 
 const router = express.Router();
@@ -17,5 +18,6 @@ router.post("/", auth, createFeedback);
 router.patch("/:id", auth, updateFeedback);
 router.delete("/:id", auth, deleteFeedback);
 router.post("/:id/comment", auth, commentFeedback);
+router.patch("/:id/upvote", auth, upvoteFeedback);
 
 module.exports = router;
