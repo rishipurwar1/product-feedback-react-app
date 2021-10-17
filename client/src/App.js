@@ -12,6 +12,9 @@ import { getFeedbacks } from "./actions/feedbacks";
 import Dashboard from "./components/dashboard/Dashboard";
 import FeedbackDetail from "./components/feedback/FeedbackDetails";
 import AuthForm from "./components/authForm/AuthForm";
+import CreateFeedback from "./components/feedback/CreateFeedback";
+import UpdateFeedback from "./components/feedback/UpdateFeedback";
+import Roadmap from "./components/roadmap/Roadmap";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,7 +24,7 @@ const App = () => {
   }, [dispatch]);
   return (
     <Router>
-      <div className="App grid md:grid-cols-1 grid-rows-mobile md:grid-rows-1 gap-16 md:gap-8 font-display">
+      <div className="App grid md:grid-cols-1 grid-rows-mobile md:grid-rows-1 gap-16 md:gap-12 font-display bg-secondary-light">
         <Switch>
           <Route exact path="/">
             <Redirect to="/feedbacks" />
@@ -38,6 +41,15 @@ const App = () => {
           </Route>
           <Route path="/auth">
             <AuthForm />
+          </Route>
+          <Route path="/create">
+            <CreateFeedback />
+          </Route>
+          <Route path="/edit/:id">
+            <UpdateFeedback />
+          </Route>
+          <Route path="/roadmap">
+            <Roadmap />
           </Route>
         </Switch>
       </div>

@@ -19,7 +19,7 @@ const Card = ({ data, disable = false }) => {
         </button>
       </div>
       <div className="text-left">
-        <Profile name="Rishi Purwar" createdAt={data.createdAt} />
+        <Profile name={data.name} createdAt={data.createdAt} />
         <p className="text-lg text-primary-dark font-semibold">{data.title}</p>
         <p className="text-secondary-dark text-sm pt-2 pb-3">
           {disable

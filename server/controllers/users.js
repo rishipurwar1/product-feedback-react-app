@@ -28,23 +28,18 @@ const signin = async (req, res) => {
 };
 
 const signup = async (req, res) => {
-  const { name, username, email, password } = req.body;
+  const { name, username, photo, email, password } = req.body;
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser)
       return res.status(404).json({ message: "User already exist." });
-
-    const existingUserName = await User.findOne({ username });
-    if (existingUserName)
-      return res
-        .status(404)
-        .json({ message: "User with the same username already exist." });
 
     const hashedPassword = await bcrypt.hash(password, 12);
     const result = await User.create({
       name,
       username,
       email,
+      photo,
       password: hashedPassword,
     });
     const token = jwt.sign(

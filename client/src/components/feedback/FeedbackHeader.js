@@ -1,25 +1,25 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import iconSuggestion from "../../assets/imgs/icon-suggestions.svg";
 import iconPlus from "../../assets/imgs/icon-plus.svg";
 import Modal from "../helpers/Modal";
 
 const FeedbackHeader = ({
-  openForm,
-  setOpenForm,
   headerName,
   btnName,
   search,
   setSearch,
   handleKeyPress,
 }) => {
+  const history = useHistory();
   const [showModal, setShowModal] = useState(false);
   const feedbacks = useSelector((state) => state.feedbacks);
   console.log(feedbacks);
   const user = JSON.parse(localStorage.getItem("profile"));
   const handleClick = () => {
     if (user?.result?.name) {
-      setOpenForm(!openForm);
+      history.push("/create");
     } else {
       setShowModal(!showModal);
     }

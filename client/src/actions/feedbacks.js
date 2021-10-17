@@ -54,6 +54,7 @@ export const createFeedback = (feedback) => async (dispatch) => {
 };
 
 export const updateFeedback = (id, feedback) => async (dispatch) => {
+  console.log(id);
   try {
     const { data } = await api.updateFeedback(id, feedback);
     dispatch({ type: "UPDATE", payload: data });
