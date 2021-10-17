@@ -79,6 +79,6 @@ export const upvoteFeedback = (id) => async (dispatch) => {
     const { data } = await api.upvoteFeedback(id);
     dispatch({ type: "UPVOTE", payload: data });
   } catch (error) {
-    console.log(error.message);
+    toast.error(error.message);
   }
 };

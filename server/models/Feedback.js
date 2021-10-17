@@ -11,7 +11,7 @@ const FeedbackSchema = new mongoose.Schema({
   status: reqString,
   name: reqString,
   creator: reqString,
-  upvotes: { type: Number, default: 0 },
+  upvotes: { type: [String], default: [] },
   comments: { type: [String], default: [] },
 });
 

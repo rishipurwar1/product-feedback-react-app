@@ -23,7 +23,7 @@ export const updateFeedback = (id, updatedFeedback) =>
 export const deleteFeedback = (id) => API.delete(`/feedbacks/${id}`);
 export const comment = (value, id) =>
   API.post(`/feedbacks/${id}/comment`, { value });
-export const upvoteFeedback = (id) => axios.patch(`/feedbacks/${id}/upvote`);
+export const upvoteFeedback = (id) => API.patch(`/feedbacks/${id}/upvote`);
 
 // auth endpoints
 export const signIn = (formData) => API.post("/user/signin", formData);

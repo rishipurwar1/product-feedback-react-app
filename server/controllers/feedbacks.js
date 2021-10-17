@@ -1,4 +1,4 @@
-const { Mongoose } = require("mongoose");
+const mongoose = require("mongoose");
 const Feedback = require("../models/Feedback");
 
 const getFeedbacks = (req, res) => {
@@ -98,16 +98,29 @@ const commentFeedback = async (req, res) => {
 
 const upvoteFeedback = async (req, res) => {
   const { id } = req.params;
-  if (!Mongoose.Types.ObjectId.isValid(id))
-    return res.status(404).send("No feedback with this ID");
-  const feedback = await Feedback.findById(id);
-  const updatedFeedback = await Feedback.findByIdAndUpdate(
-    id,
-    { upvotes: feedback.upvotes + 1 },
-    { new: true }
-  );
 
-  res.json(updatedFeedback);
+  if (!req.userId) {
+    return res.json({ message: "Unauthenticated" });
+  }
+
+  if (!mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send(`No feedback with id: ${id}`);
+
+  const feedback = await Feedback.findById(id);
+
+  const index = feedback.upvotes.findIndex((id) => id === String(req.userId));
+
+  if (index === -1) {
+    feedback.upvotes.push(req.userId);
+  } else {
+    feedback.upvotes = feedback.upvotes.filter(
+      (id) => id !== String(req.userId)
+    );
+  }
+  const updatedFeedback = await Feedback.findByIdAndUpdate(id, feedback, {
+    new: true,
+  });
+  res.status(200).json(updatedFeedback);
 };
 
 module.exports = {
