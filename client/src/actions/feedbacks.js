@@ -1,4 +1,5 @@
 import * as api from "../api";
+import toast from "react-hot-toast";
 
 // FEEDBACKS ACTIONS CREATOR
 export const getFeedbacks = () => async (dispatch) => {
@@ -14,16 +15,6 @@ export const getFeedbacks = () => async (dispatch) => {
 export const filterFeedbacks = (query) => async (dispatch) => {
   try {
     const { data } = await api.filterFeedbacks(query);
-    dispatch({ type: "FETCH_ALL", payload: data });
-  } catch (error) {
-    console.log(error.message);
-  }
-};
-
-export const fetchFeedbacksByStatus = (query) => async (dispatch) => {
-  try {
-    const { data } = await api.fetchFeedbacksByStatus(query);
-    console.log(data);
     dispatch({ type: "FETCH_ALL", payload: data });
   } catch (error) {
     console.log(error.message);
@@ -46,8 +37,9 @@ export const createFeedback = (feedback) => async (dispatch) => {
   try {
     const { data } = await api.createFeedback(feedback);
     dispatch({ type: "CREATE", payload: data });
+    toast.success("Feedback submitted");
   } catch (error) {
-    console.log(error.message);
+    toast.error(error.message);
   }
 };
 
@@ -56,8 +48,9 @@ export const updateFeedback = (id, feedback) => async (dispatch) => {
   try {
     const { data } = await api.updateFeedback(id, feedback);
     dispatch({ type: "UPDATE", payload: data });
+    toast.success("Feedback updated");
   } catch (error) {
-    console.log(error.message);
+    toast.error(error.message);
   }
 };
 
@@ -65,8 +58,9 @@ export const deleteFeedback = (id) => async (dispatch) => {
   try {
     await api.deleteFeedback(id);
     dispatch({ type: "DELETE", payload: id });
+    toast.success("Feedback deleted");
   } catch (error) {
-    console.log(error);
+    toast.error(error.message);
   }
 };
 
@@ -77,5 +71,14 @@ export const commentFeedback = (value, id) => async (dispatch) => {
     return data.comments;
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const upvoteFeedback = (id) => async (dispatch) => {
+  try {
+    const { data } = await api.upvoteFeedback(id);
+    dispatch({ type: "UPVOTE", payload: data });
+  } catch (error) {
+    console.log(error.message);
   }
 };

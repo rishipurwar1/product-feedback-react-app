@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import FeedbackHeader from "../feedback/FeedbackHeader";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
 import { useHistory } from "react-router";
 import FilterFeedbacks from "../feedback/FilterFeedbacks";
@@ -8,8 +8,8 @@ import Roadmap from "./Roadmap";
 import FeedbackList from "../feedback/FeedbackList";
 import { Link } from "react-router-dom";
 import { getFeedbacks, getFeedbacksBySearch } from "../../actions/feedbacks";
-import Profile from "../helpers/Profile";
 import ProfileModal from "../helpers/ProfileModal";
+import toast from "react-hot-toast";
 
 const Dashboard = () => {
   const [openForm, setOpenForm] = useState(false);
@@ -37,6 +37,7 @@ const Dashboard = () => {
   const logout = () => {
     dispatch({ type: "LOGOUT" });
     history.push("/");
+    toast.success("Log Out successfully");
     setUser(null);
   };
 
