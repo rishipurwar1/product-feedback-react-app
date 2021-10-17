@@ -14,8 +14,6 @@ API.interceptors.request.use((req) => {
 export const fetchFeedbacks = () => API.get("/feedbacks");
 export const filterFeedbacks = (query) =>
   API.get(`/feedbacks?category=${query}`);
-export const fetchFeedbacksByStatus = (query) =>
-  API.get(`/feedbacks?status=${query}`);
 export const fetchFeedbacksBySearch = (query) =>
   API.get(`/feedbacks/search?query=${query}`);
 export const createFeedback = (newFeedback) =>
@@ -25,6 +23,12 @@ export const updateFeedback = (id, updatedFeedback) =>
 export const deleteFeedback = (id) => API.delete(`/feedbacks/${id}`);
 export const comment = (value, id) =>
   API.post(`/feedbacks/${id}/comment`, { value });
+export const updateFeedbackByStatus = (id) =>
+  API.patch(`/feedbacks/${id}/status`, updateFeedbackByStatus);
+
+// live features
+export const fetchFeedbacksByStatus = (query) =>
+  API.get(`/feedbacks?status=${query}`);
 
 // auth endpoints
 export const signIn = (formData) => API.post("/user/signin", formData);
