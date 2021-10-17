@@ -8,9 +8,6 @@ export default (feedbacks = [], action) => {
     case "CREATE":
       return [...feedbacks, action.payload];
     case "UPDATE":
-      return feedbacks.map((feedback) =>
-        feedback._id === action.payload._id ? action.payload : feedback
-      );
     case "UPVOTE":
       return feedbacks.map((feedback) =>
         feedback._id === action.payload._id ? action.payload : feedback
