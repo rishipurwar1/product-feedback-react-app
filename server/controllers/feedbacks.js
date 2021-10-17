@@ -1,3 +1,4 @@
+const { Mongoose } = require("mongoose");
 const Feedback = require("../models/Feedback");
 
 const getFeedbacks = (req, res) => {
@@ -95,6 +96,20 @@ const commentFeedback = async (req, res) => {
   res.json(updatedFeedback);
 };
 
+const upvoteFeedback = async (req, res) => {
+  const { id } = req.params;
+  if (!Mongoose.Types.ObjectId.isValid(id))
+    return res.status(404).send("No feedback with this ID");
+  const feedback = await Feedback.findById(id);
+  const updatedFeedback = await Feedback.findByIdAndUpdate(
+    id,
+    { upvotes: feedback.upvotes + 1 },
+    { new: true }
+  );
+
+  res.json(updatedFeedback);
+};
+
 module.exports = {
   getFeedbacks,
   getFeedbacksByStatus,
@@ -103,4 +118,5 @@ module.exports = {
   updateFeedback,
   deleteFeedback,
   commentFeedback,
+  upvoteFeedback,
 };
