@@ -20,6 +20,11 @@ module.exports = {
         "bookmark-grey": "#9194A2",
         "bookmark-white": "#f7f7f7",
         "btn-hover": "#C659F6",
+        status: {
+          planned: "#F49F85",
+          "in-progress": "#AD1FEA",
+          live: "#62BCFA",
+        },
       },
       gridTemplateColumns: {
         body: "255px 1fr",

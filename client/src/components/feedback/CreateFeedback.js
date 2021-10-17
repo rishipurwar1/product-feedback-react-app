@@ -1,0 +1,130 @@
+import React from "react";
+import { useForm, FormProvider } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { Link, useHistory, useParams } from "react-router-dom";
+import { createFeedback, updateFeedback } from "../../actions/feedbacks";
+import iconNewFeedback from "../../assets/imgs/icon-new-feedback.svg";
+import Input from "../authForm/Input";
+import Label from "../authForm/Label";
+import Button from "../helpers/Button";
+
+const categories = [
+  { label: "Feature", value: "feature" },
+  { label: "Bug", value: "bug" },
+  { label: "Enhancement", value: "enhancement" },
+  { label: "UI", value: "ui" },
+  { label: "UX", value: "ux" },
+];
+
+const CreateFeedback = ({ feedback }) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const formMethods = useForm();
+  const { handleSubmit, register, reset, formState: errors } = formMethods;
+  // get user profile from local storage
+  const user = JSON.parse(localStorage.getItem("profile"));
+
+  const onSubmit = async (data) => {
+    if (feedback) {
+      await dispatch(updateFeedback(feedback._id, data));
+      history.push("/feedbacks");
+      reset("", {
+        keepValues: false,
+      });
+    } else {
+      await dispatch(
+        createFeedback({
+          ...data,
+          status: "suggestion",
+          name: user?.result?.name,
+        })
+      );
+      history.push("/feedbacks");
+    }
+  };
+  return (
+    <div className="row-start-2 row-end-3 col-start-1 col-end-2 mx-auto w-full max-w-xl my-10">
+      <div className="flex justify-between">
+        <Link to="/" className="text-secondary-dark text-sm font-bold">
+          <i className="fas fa-angle-left text-tertiary-dark"></i>&nbsp;&nbsp;
+          Go back
+        </Link>
+      </div>
+      <div className="bg-white px-6 py-8 rounded-lg shadow-sm mx-auto mt-16 relative">
+        <FormProvider {...formMethods}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <img
+              src={iconNewFeedback}
+              className="w-16 absolute -top-8"
+              alt="Add new feedback"
+            />
+            <h1 className="text-lg font-semibold text-primary-dark mt-8">
+              Create New Feedback
+            </h1>
+            <div className="mt-3">
+              <Label labelName="Feedback Title" />
+              <small className="text-base text-secondary-dark mb-2 inline-block">
+                Add a short, descriptive headline
+              </small>
+              <Input inputName="title" type="text" />
+            </div>
+            <div className="mt-3">
+              <Label labelName="Category" />
+              <small className="text-base text-secondary-dark mb-2 inline-block">
+                Choose a category for your feedback
+              </small>
+              {/* <Input inputName="title" type="text" /> */}
+              <select
+                name="category"
+                id="category"
+                className="block w-full p-3 bg-primary-light rounded-md outline-none focus:ring-1 focus:ring-tertiary-dark text-primary-dark font-bold text-xs"
+                {...register("category", { required: true })}
+              >
+                {categories.map((category) => (
+                  <option key={category.value} value={category.value}>
+                    {category.label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="mt-3">
+              <Label labelName="Feedback Detail" />
+              <small className="text-base text-secondary-dark mb-2 inline-block">
+                Include any specific comments on what should be improved, added,
+                etc.
+              </small>
+              <textarea
+                name="description"
+                id="description"
+                cols="30"
+                rows="5"
+                className={`${
+                  errors.errors.description?.type === "required"
+                    ? "focus:outline-none focus:border-red-500"
+                    : "focus:outline-none focus:border-tertiary-dark"
+                } p-4 w-full rounded-lg bg-primary-light text-primary-dark font-bold text-xs border focus:outline-none border-gray-100`}
+                {...register("description", { required: true })}
+              ></textarea>
+            </div>
+            <div className="flex justify-end mt-8">
+              <Button
+                type="button"
+                btnText="Cancel"
+                bgColor="bg-primary-dark"
+                hoverBgColor="bg-secondary-dark"
+              />
+              <button
+                type="submit"
+                className="px-5 py-3 text-sm rounded-lg ml-2 bg-neutral text-white hover:bg-btn-hover"
+              >
+                Add Feedback
+              </button>
+            </div>
+          </form>
+        </FormProvider>
+      </div>
+    </div>
+  );
+};
+
+export default CreateFeedback;

@@ -8,7 +8,9 @@ const FeedbackSchema = new mongoose.Schema({
   title: reqString,
   description: reqString,
   category: reqString,
-  status: String,
+  status: reqString,
+  name: reqString,
+  creator: reqString,
   upvotes: { type: Number, default: 0 },
   comments: { type: [String], default: [] },
 });

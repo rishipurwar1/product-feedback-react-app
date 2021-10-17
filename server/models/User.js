@@ -7,6 +7,7 @@ const reqString = {
 const userSchema = mongoose.Schema({
   name: reqString,
   username: reqString,
+  photo: reqString,
   email: reqString,
   password: reqString,
 });

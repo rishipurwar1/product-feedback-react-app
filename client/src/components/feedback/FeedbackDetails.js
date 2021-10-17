@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import Card from "../dashboard/Card";
 import CommentSection from "./CommentSection";
@@ -9,6 +9,7 @@ import ActionModal from "../helpers/ActionModal";
 
 const FeedbackDetail = () => {
   const { id } = useParams();
+  const history = useHistory();
   const [showModal, setShowModal] = useState(false);
   const [openForm, setOpenForm] = useState(false);
   const user = JSON.parse(localStorage.getItem("profile"));
@@ -16,6 +17,7 @@ const FeedbackDetail = () => {
   const feedback = useSelector((state) =>
     state.feedbacks.filter((feedback) => feedback._id === id)
   );
+  console.log(feedback);
   if (feedback.length > 0) {
     return (
       <div className="row-start-2 row-end-3 col-start-1 col-end-2 mx-auto w-3/5">
@@ -24,20 +26,22 @@ const FeedbackDetail = () => {
             <i className="fas fa-angle-left text-tertiary-dark"></i>&nbsp;&nbsp;
             Go back
           </Link>
-          <div>
-            <Button
-              btnText="Edit"
-              iconType="fas fa-edit"
-              bgColor="bg-tertiary-dark"
-              handleClick={() => setOpenForm(!openForm)}
-            />
-            <Button
-              btnText="Delete"
-              iconType="fas fa-trash-alt"
-              bgColor="bg-tertiary-dark"
-              handleClick={() => setShowModal(!showModal)}
-            />
-          </div>
+          {user?.result?._id === feedback[0]?.creator ? (
+            <div>
+              <Button
+                btnText="Edit"
+                iconType="fas fa-edit"
+                bgColor="bg-tertiary-dark"
+                handleClick={() => history.push(`/edit/${id}`)}
+              />
+              <Button
+                btnText="Delete"
+                iconType="fas fa-trash-alt"
+                bgColor="bg-tertiary-dark"
+                handleClick={() => setShowModal(!showModal)}
+              />
+            </div>
+          ) : null}
         </div>
         <Card data={feedback[0]} disable />
         <CommentSection data={feedback[0]} />
