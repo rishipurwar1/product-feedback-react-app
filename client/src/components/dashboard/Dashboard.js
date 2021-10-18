@@ -83,7 +83,6 @@ const Dashboard = () => {
             search={search}
           />
           <FeedbackList />
-          {/* <AddQuestion openForm={openForm} setOpenForm={setOpenForm} /> */}
         </div>
       </div>
     </main>

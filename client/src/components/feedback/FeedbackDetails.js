@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useParams, Link, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { Helmet } from "react-helmet";
 import Card from "../dashboard/Card";
 import CommentSection from "./CommentSection";
 import LoginCard from "../helpers/LoginCard";
@@ -21,6 +22,13 @@ const FeedbackDetail = () => {
   if (feedback.length > 0) {
     return (
       <div className="row-start-2 row-end-3 col-start-1 col-end-2 mx-auto w-3/5">
+        <Helmet>
+          <title>{feedback[0].title}</title>
+          <meta
+            name="description"
+            content="feedback react app for our codingspace opensource project"
+          />
+        </Helmet>
         <div className="flex justify-between">
           <Link to="/" className="text-secondary-dark text-sm font-bold">
             <i className="fas fa-angle-left text-tertiary-dark"></i>&nbsp;&nbsp;

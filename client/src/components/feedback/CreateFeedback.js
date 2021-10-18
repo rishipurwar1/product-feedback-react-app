@@ -2,6 +2,7 @@ import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { Link, useHistory } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import { createFeedback, updateFeedback } from "../../actions/feedbacks";
 import iconNewFeedback from "../../assets/imgs/icon-new-feedback.svg";
 import loader from "../../assets/imgs/loader.svg";
@@ -19,6 +20,7 @@ const categories = [
 
 const CreateFeedback = ({ feedback }) => {
   const history = useHistory();
+  console.log(history);
   const dispatch = useDispatch();
   const formMethods = useForm();
   const {
@@ -49,6 +51,13 @@ const CreateFeedback = ({ feedback }) => {
   };
   return (
     <div className="row-start-2 row-end-3 col-start-1 col-end-2 mx-auto w-full max-w-xl my-10">
+      <Helmet>
+        <title>Create New Feedback</title>
+        <meta
+          name="description"
+          content="create a new feedback or give your suggestion"
+        />
+      </Helmet>
       <div className="flex justify-between">
         <Link to="/" className="text-secondary-dark text-sm font-bold">
           <i className="fas fa-angle-left text-tertiary-dark"></i>&nbsp;&nbsp;

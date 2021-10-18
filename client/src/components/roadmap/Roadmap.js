@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useSelector, useDispatch } from "react-redux";
 import uuid from "uuid/v4";
+import { Helmet } from "react-helmet";
 import { getFeedbacks, updateFeedback } from "../../actions/feedbacks";
 import CategoryTag from "../helpers/CategoryTag";
 import CommentIcon from "../helpers/CommentIcon";
@@ -57,7 +58,6 @@ const Roadmap = () => {
       const destColumn = columns[destination.droppableId];
       const sourceItems = [...sourceColumn.items];
       const destItems = [...destColumn.items];
-      console.log(sourceColumn, destColumn);
       const [removed] = sourceItems.splice(source.index, 1);
       destItems.splice(destination.index, 0, removed);
       setColumns({
@@ -71,20 +71,33 @@ const Roadmap = () => {
           items: destItems,
         },
       });
-      console.log(removed);
       switch (destColumn.name) {
         case "Planned":
           dispatch(
-            updateFeedback(removed._id, { ...removed, status: "planned" })
+            updateFeedback(
+              removed._id,
+              { ...removed, status: "planned" },
+              "roadmap"
+            )
           );
           break;
         case "In-Progress":
           dispatch(
-            updateFeedback(removed._id, { ...removed, status: "in-progress" })
+            updateFeedback(
+              removed._id,
+              { ...removed, status: "in-progress" },
+              "roadmap"
+            )
           );
           break;
         default:
-          dispatch(updateFeedback(removed._id, { ...removed, status: "live" }));
+          dispatch(
+            updateFeedback(
+              removed._id,
+              { ...removed, status: "live" },
+              "roadmap"
+            )
+          );
       }
     } else {
       const column = columns[source.droppableId];
@@ -108,6 +121,13 @@ const Roadmap = () => {
   if (feedbacks.length > 0) {
     return (
       <div className="row-start-2 row-end-3 col-start-1 col-end-2 mx-auto">
+        <Helmet>
+          <title>Roadmap - Kanban Board</title>
+          <meta
+            name="description"
+            content="roadmap for our codingspace opensource project"
+          />
+        </Helmet>
         <RoadmapHeader />
         <div className="w-full max-w-5xl mt-10 flex h-screen">
           <DragDropContext

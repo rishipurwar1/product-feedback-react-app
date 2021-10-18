@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useHistory, useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import { updateFeedback } from "../../actions/feedbacks";
 import iconEditFeedback from "../../assets/imgs/icon-edit-feedback.svg";
 import loader from "../../assets/imgs/loader.svg";
@@ -64,11 +65,18 @@ const UpdateFeedback = () => {
 
   return (
     <div className="row-start-2 row-end-3 col-start-1 col-end-2 mx-auto w-full max-w-xl my-10">
+      <Helmet>
+        <title>Update Feedback</title>
+        <meta name="description" content="update your feedback" />
+      </Helmet>
       <div className="flex justify-between">
-        <Link to="/" className="text-secondary-dark text-sm font-bold">
+        <button
+          onClick={() => history.goBack()}
+          className="text-secondary-dark text-sm font-bold"
+        >
           <i className="fas fa-angle-left text-tertiary-dark"></i>&nbsp;&nbsp;
           Go back
-        </Link>
+        </button>
       </div>
       <div className="bg-white px-6 py-8 rounded-lg shadow-sm mx-auto mt-16 relative">
         <FormProvider {...formMethods}>
@@ -79,7 +87,7 @@ const UpdateFeedback = () => {
               alt="Add new feedback"
             />
             <h1 className="text-lg font-semibold text-primary-dark mt-8">
-              Create New Feedback
+              {`Editing ${feedback[0].title}`}
             </h1>
             <div className="mt-3">
               <Label labelName="Feedback Title" />
