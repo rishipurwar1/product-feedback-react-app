@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useHistory, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import { updateFeedback } from "../../actions/feedbacks";
 import iconEditFeedback from "../../assets/imgs/icon-edit-feedback.svg";
 import loader from "../../assets/imgs/loader.svg";
 import Input from "../authForm/Input";
 import Label from "../authForm/Label";
 import Button from "../helpers/Button";
+import PageHeader from "../helpers/PageHeader";
 
 const categories = [
   { label: "Feature", value: "feature" },
@@ -63,13 +65,12 @@ const UpdateFeedback = () => {
   }, [feedback, setValue]);
 
   return (
-    <div className="row-start-2 row-end-3 col-start-1 col-end-2 mx-auto w-full max-w-xl my-10">
-      <div className="flex justify-between">
-        <Link to="/" className="text-secondary-dark text-sm font-bold">
-          <i className="fas fa-angle-left text-tertiary-dark"></i>&nbsp;&nbsp;
-          Go back
-        </Link>
-      </div>
+    <div className="mx-auto w-full max-w-xl my-16 px-2 sm:px-5">
+      <Helmet>
+        <title>Update Feedback</title>
+        <meta name="description" content="update your feedback" />
+      </Helmet>
+      <PageHeader />
       <div className="bg-white px-6 py-8 rounded-lg shadow-sm mx-auto mt-16 relative">
         <FormProvider {...formMethods}>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -79,7 +80,7 @@ const UpdateFeedback = () => {
               alt="Add new feedback"
             />
             <h1 className="text-lg font-semibold text-primary-dark mt-8">
-              Create New Feedback
+              {`Editing ${feedback[0].title}`}
             </h1>
             <div className="mt-3">
               <Label labelName="Feedback Title" />
@@ -145,7 +146,7 @@ const UpdateFeedback = () => {
                 {...register("description", { required: true })}
               ></textarea>
             </div>
-            <div className="flex justify-end mt-8">
+            <div className="flex flex-col-reverse md:flex-row md:justify-end mt-8">
               <Button
                 type="button"
                 btnText="Cancel"
@@ -155,7 +156,7 @@ const UpdateFeedback = () => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`px-5 py-3 text-sm rounded-lg ml-2 bg-neutral text-white ${
+                className={`px-5 py-3 text-sm rounded-lg mb-4 md:mb-0 md:ml-2 bg-neutral text-white ${
                   isSubmitting && "bg-btn-hover"
                 } hover:bg-btn-hover`}
               >

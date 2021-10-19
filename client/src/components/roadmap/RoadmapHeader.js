@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import iconSuggestion from "../../assets/imgs/icon-suggestions.svg";
 import iconPlus from "../../assets/imgs/icon-plus.svg";
 import Modal from "../helpers/Modal";
+import PageHeader from "../helpers/PageHeader";
 
 const RoadmapHeader = () => {
   const history = useHistory();
@@ -18,13 +19,10 @@ const RoadmapHeader = () => {
     }
   };
   return (
-    <div className="w-full max-w-5xl rounded-lg bg-primary-dark px-6 py-5 flex justify-between items-center">
+    <div className="w-full md:rounded-lg bg-primary-dark px-6 py-5 flex justify-between items-center">
       <div className="flex flex-col">
-        <Link to="/" className="text-white text-sm font-bold mb-4">
-          <i className="fas fa-angle-left mr-2"></i> Go back
-        </Link>
-        {/* <img src={iconSuggestion} className="mr-4" alt="suggestions" /> */}
-        <h1 className="text-white font-bold text-lg">Roadmap</h1>
+        <PageHeader color="white" />
+        <h1 className="text-white font-bold text-lg mt-4">Roadmap</h1>
       </div>
       <button
         onClick={() => handleClick()}

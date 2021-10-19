@@ -2,11 +2,14 @@ import React, { useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useSelector, useDispatch } from "react-redux";
 import uuid from "uuid/v4";
+import { Helmet } from "react-helmet";
 import { getFeedbacks, updateFeedback } from "../../actions/feedbacks";
 import CategoryTag from "../helpers/CategoryTag";
 import CommentIcon from "../helpers/CommentIcon";
 import Upvote from "../helpers/Upvote";
 import RoadmapHeader from "./RoadmapHeader";
+import { Link } from "react-router-dom";
+import RoadMapTab from "./RoadMapTab";
 
 const Roadmap = () => {
   const feedbacks = useSelector((state) => state.feedbacks);
@@ -29,17 +32,17 @@ const Roadmap = () => {
     });
 
   const columnsFromBackend = {
-    [uuid()]: {
+    planned: {
       name: "Planned",
       subTitle: "Ideas prioritized for research",
       items: plannedFeatures,
     },
-    [uuid()]: {
+    "in-progress": {
       name: "In-Progress",
       subTitle: "Currently being developed",
       items: inProgressFeatures,
     },
-    [uuid()]: {
+    live: {
       name: "Live",
       subTitle: "Released features",
       items: liveFeatures,
@@ -57,7 +60,6 @@ const Roadmap = () => {
       const destColumn = columns[destination.droppableId];
       const sourceItems = [...sourceColumn.items];
       const destItems = [...destColumn.items];
-      console.log(sourceColumn, destColumn);
       const [removed] = sourceItems.splice(source.index, 1);
       destItems.splice(destination.index, 0, removed);
       setColumns({
@@ -71,20 +73,33 @@ const Roadmap = () => {
           items: destItems,
         },
       });
-      console.log(removed);
       switch (destColumn.name) {
         case "Planned":
           dispatch(
-            updateFeedback(removed._id, { ...removed, status: "planned" })
+            updateFeedback(
+              removed._id,
+              { ...removed, status: "planned" },
+              "roadmap"
+            )
           );
           break;
         case "In-Progress":
           dispatch(
-            updateFeedback(removed._id, { ...removed, status: "in-progress" })
+            updateFeedback(
+              removed._id,
+              { ...removed, status: "in-progress" },
+              "roadmap"
+            )
           );
           break;
         default:
-          dispatch(updateFeedback(removed._id, { ...removed, status: "live" }));
+          dispatch(
+            updateFeedback(
+              removed._id,
+              { ...removed, status: "live" },
+              "roadmap"
+            )
+          );
       }
     } else {
       const column = columns[source.droppableId];
@@ -107,9 +122,22 @@ const Roadmap = () => {
 
   if (feedbacks.length > 0) {
     return (
-      <div className="row-start-2 row-end-3 col-start-1 col-end-2 mx-auto">
+      <div className="mx-auto md:mt-16 max-w-5xl md:px-5">
+        <Helmet>
+          <title>Roadmap - Kanban Board</title>
+          <meta
+            name="description"
+            content="roadmap for our codingspace opensource project"
+          />
+        </Helmet>
         <RoadmapHeader />
-        <div className="w-full max-w-5xl mt-10 flex h-screen">
+        <RoadMapTab
+          plannedFeatures={plannedFeatures}
+          inProgressFeatures={inProgressFeatures}
+          liveFeatures={liveFeatures}
+          column={columns}
+        />
+        <div className="hidden w-full mt-10 md:grid grid-cols-3 gap-4 lg:gap-8 h-screen px-2 sm:px-5">
           <DragDropContext
             onDragEnd={(result) => onDragEnd(result, columns, setColumns)}
           >
@@ -126,36 +154,35 @@ const Roadmap = () => {
                   borderColor = "border-status-live";
               }
               return (
-                <div className="flex flex-col" key={columnId}>
+                <div className="" key={columnId}>
                   <h1 className="text-primary-dark font-bold">{`${column.name} (${column.items.length})`}</h1>
                   <p className="text-secondary-dark text-sm">
                     {column.subTitle}
                   </p>
-                  <div className="my-2">
-                    <Droppable droppableId={columnId} key={columnId}>
-                      {(provided, snapshot) => {
-                        return (
-                          <div
-                            {...provided.droppableProps}
-                            ref={provided.innerRef}
-                            className="py-4 pr-6 w-80"
-                          >
-                            {column.items.map((item, index) => {
-                              console.log("hello");
-                              return (
-                                <Draggable
-                                  key={item._id}
-                                  draggableId={item._id}
-                                  index={index}
-                                >
-                                  {(provided, snapshot) => {
-                                    return (
-                                      <div
-                                        ref={provided.innerRef}
-                                        {...provided.draggableProps}
-                                        {...provided.dragHandleProps}
-                                        className={`p-4 mb-2 bg-white rounded-lg border-t-4 cursor-pointer ${borderColor}`}
-                                      >
+                  <Droppable droppableId={columnId} key={columnId}>
+                    {(provided, snapshot) => {
+                      return (
+                        <ul
+                          {...provided.droppableProps}
+                          ref={provided.innerRef}
+                          className="mt-6 space-y-4 lg:space-y-6"
+                        >
+                          {column.items.map((item, index) => {
+                            return (
+                              <Draggable
+                                key={item._id}
+                                draggableId={item._id}
+                                index={index}
+                              >
+                                {(provided, snapshot) => {
+                                  return (
+                                    <li
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
+                                      {...provided.dragHandleProps}
+                                      className={`p-4 mb-4 bg-white rounded-lg border-t-4 cursor-pointer ${borderColor}`}
+                                    >
+                                      <Link to={`/feedbacks/${item._id}`}>
                                         <h2
                                           className={`text-primary-dark font-bold `}
                                         >
@@ -171,18 +198,18 @@ const Roadmap = () => {
                                             comments={item.comments.length}
                                           />
                                         </div>
-                                      </div>
-                                    );
-                                  }}
-                                </Draggable>
-                              );
-                            })}
-                            {provided.placeholder}
-                          </div>
-                        );
-                      }}
-                    </Droppable>
-                  </div>
+                                      </Link>
+                                    </li>
+                                  );
+                                }}
+                              </Draggable>
+                            );
+                          })}
+                          {provided.placeholder}
+                        </ul>
+                      );
+                    }}
+                  </Droppable>
                 </div>
               );
             })}

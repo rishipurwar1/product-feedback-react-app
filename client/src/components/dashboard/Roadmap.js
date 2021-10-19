@@ -21,7 +21,7 @@ const Roadmap = () => {
       }
     });
   return (
-    <div className="bg-white rounded-lg p-4 px-5">
+    <div className="md:block bg-white rounded-lg p-4 px-5">
       <div className="flex justify-between">
         <p className="inline font-bold text-lg text-primary-dark">Roadmap</p>
         <Link

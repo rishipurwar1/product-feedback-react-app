@@ -43,12 +43,15 @@ export const createFeedback = (feedback) => async (dispatch) => {
   }
 };
 
-export const updateFeedback = (id, feedback) => async (dispatch) => {
-  console.log(id);
+export const updateFeedback = (id, feedback, roadmap) => async (dispatch) => {
   try {
     const { data } = await api.updateFeedback(id, feedback);
     dispatch({ type: "UPDATE", payload: data });
-    toast.success("Feedback updated");
+    if (roadmap) {
+      toast.success("Board updated successfully");
+    } else {
+      toast.success("Feedback updated successfully");
+    }
   } catch (error) {
     toast.error(error.message);
   }

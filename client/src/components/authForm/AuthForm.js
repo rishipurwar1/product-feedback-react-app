@@ -3,11 +3,13 @@ import Input from "./Input";
 import Label from "./Label";
 import { useForm, FormProvider } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { Helmet } from "react-helmet";
 import { useHistory } from "react-router";
 import { signin, signup } from "../../actions/auth";
 import { v4 as uuidv4 } from "uuid";
 import ErrorMessage from "../helpers/ErrorMessage";
 import loader from "../../assets/imgs/loader.svg";
+import PageHeader from "../helpers/PageHeader";
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -47,8 +49,16 @@ const AuthForm = () => {
   };
 
   return (
-    <section className="col-start-1 col-end-2 sm:mx-0 md:my-auto h-screen self-center">
-      <div className=" w-full max-w-md bg-white mt-16 px-6 py-8 rounded-md shadow-md mx-auto">
+    <section className="mx-auto w-full max-w-md my-16 px-2 sm:px-5">
+      <Helmet>
+        <title>{isLogin ? "Log In Form" : "Sign Up Form"}</title>
+        <meta
+          name="description"
+          content="feedback react app for our codingspace opensource project"
+        />
+      </Helmet>
+      <PageHeader />
+      <div className=" w-full max-w-md bg-white mt-5 px-6 py-8 rounded-md shadow-md mx-auto">
         <FormProvider {...formMethods}>
           <form className="" onSubmit={handleSubmit(onSubmit)}>
             <div className="w-full flex justify-around mb-2">

@@ -9,6 +9,7 @@ import {
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
+import { Helmet } from "react-helmet";
 import { getFeedbacks } from "./actions/feedbacks";
 import Dashboard from "./components/dashboard/Dashboard";
 import FeedbackDetail from "./components/feedback/FeedbackDetails";
@@ -55,7 +56,14 @@ const App = () => {
         }}
       />
       <Router>
-        <div className="App grid md:grid-cols-1 grid-rows-mobile md:grid-rows-1 gap-16 md:gap-12 font-display bg-secondary-light">
+        <Helmet>
+          <title>CODINGSPACE Feedback App</title>
+          <meta
+            name="description"
+            content="feedback react app for our codingspace opensource project"
+          />
+        </Helmet>
+        <div className="font-display bg-secondary-light">
           <Switch>
             <Route exact path="/">
               <Redirect to="/feedbacks" />

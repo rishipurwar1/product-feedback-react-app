@@ -7,7 +7,7 @@ const FilterFeedbacks = ({ filterExperiences }) => {
     filterExperiences(searchTerm);
   };
   return (
-    <div className=" bg-white rounded-lg p-4 my-4">
+    <div className="md:block bg-white rounded-lg p-4 lg:my-4 place-self-stretch mb-5 md:mb-0">
       <h2 className="text-md text-left text-primary-dark font-bold mb-3">
         Popular Tags
       </h2>
