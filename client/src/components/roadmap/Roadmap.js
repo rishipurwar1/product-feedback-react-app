@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useSelector, useDispatch } from "react-redux";
-import uuid from "uuid/v4";
 import { Helmet } from "react-helmet";
 import { getFeedbacks, updateFeedback } from "../../actions/feedbacks";
 import CategoryTag from "../helpers/CategoryTag";

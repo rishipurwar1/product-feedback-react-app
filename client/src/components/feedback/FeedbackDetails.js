@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams, Link, useHistory } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Helmet } from "react-helmet";
 import Card from "../dashboard/Card";
@@ -13,16 +13,14 @@ const FeedbackDetail = () => {
   const { id } = useParams();
   const history = useHistory();
   const [showModal, setShowModal] = useState(false);
-  const [openForm, setOpenForm] = useState(false);
   const user = JSON.parse(localStorage.getItem("profile"));
 
   const feedback = useSelector((state) =>
     state.feedbacks.filter((feedback) => feedback._id === id)
   );
-  console.log(feedback);
   if (feedback.length > 0) {
     return (
-      <div className="mt-16 mx-auto px-2 sm:px-5 max-w-4xl lg:w-3/5">
+      <div className="mt-16 mx-auto px-5 max-w-4xl lg:w-3/5">
         <Helmet>
           <title>{feedback[0].title}</title>
           <meta
@@ -60,13 +58,6 @@ const FeedbackDetail = () => {
             setShowModal={setShowModal}
           />
         )}
-        {/* {openForm && (
-          <AddOpportunity
-            initialData={opportunity[0]}
-            openForm={openForm}
-            setOpenForm={setOpenForm}
-          />
-        )} */}
       </div>
     );
   } else {

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
-import iconSuggestion from "../../assets/imgs/icon-suggestions.svg";
+import { useHistory } from "react-router-dom";
 import iconPlus from "../../assets/imgs/icon-plus.svg";
 import Modal from "../helpers/Modal";
 import PageHeader from "../helpers/PageHeader";

@@ -4,7 +4,6 @@ import { useHistory } from "react-router-dom";
 import { deleteFeedback } from "../../actions/feedbacks";
 
 const ActionModal = ({ setShowModal, feedbackId }) => {
-  console.log(feedbackId);
   const history = useHistory();
   const dispatch = useDispatch();
   return (

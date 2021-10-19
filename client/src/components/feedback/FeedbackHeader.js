@@ -15,7 +15,6 @@ const FeedbackHeader = ({
   const history = useHistory();
   const [showModal, setShowModal] = useState(false);
   const feedbacks = useSelector((state) => state.feedbacks);
-  console.log(feedbacks);
   const user = JSON.parse(localStorage.getItem("profile"));
   const handleClick = () => {
     if (user?.result?.name) {

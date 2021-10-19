@@ -28,6 +28,7 @@ module.exports = {
       },
       gridTemplateColumns: {
         body: "255px 1fr",
+        header: "1fr 2fr",
         card: "auto 1fr auto",
       },
       fontFamily: {

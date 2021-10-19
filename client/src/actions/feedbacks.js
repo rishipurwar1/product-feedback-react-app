@@ -5,7 +5,6 @@ import toast from "react-hot-toast";
 export const getFeedbacks = () => async (dispatch) => {
   try {
     const { data } = await api.fetchFeedbacks();
-    console.log(data);
     dispatch({ type: "FETCH_ALL", payload: data });
   } catch (error) {
     console.log(error.message);
@@ -26,7 +25,6 @@ export const getFeedbacksBySearch = (query) => async (dispatch) => {
     const {
       data: { data },
     } = await api.fetchFeedbacksBySearch(query);
-    console.log(data);
     dispatch({ type: "FETCH_FEEDBACKS_BY_SEARCH", payload: { data } });
   } catch (error) {
     console.log(error);

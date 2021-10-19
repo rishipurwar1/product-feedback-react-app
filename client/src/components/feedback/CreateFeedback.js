@@ -21,7 +21,6 @@ const categories = [
 
 const CreateFeedback = ({ feedback }) => {
   const history = useHistory();
-  console.log(history);
   const dispatch = useDispatch();
   const formMethods = useForm();
   const {
