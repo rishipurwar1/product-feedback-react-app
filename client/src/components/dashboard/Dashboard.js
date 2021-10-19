@@ -10,9 +10,11 @@ import { Link } from "react-router-dom";
 import { getFeedbacks, getFeedbacksBySearch } from "../../actions/feedbacks";
 import ProfileModal from "../helpers/ProfileModal";
 import toast from "react-hot-toast";
+import Sidebar from "../Layouts/Sidebar";
 
 const Dashboard = () => {
   const [openForm, setOpenForm] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const [search, setSearch] = useState("");
   const history = useHistory();
@@ -53,37 +55,54 @@ const Dashboard = () => {
   }, [location]);
 
   return (
-    <main className="col-start-1 col-end-2 row-start-2 row-end-3 md:row-start-1 md:row-end-2 md:py-16 w-full mx-auto max-w-5xl">
-      <div className="grid grid-cols-body gap-x-6">
-        <div>
-          <div className="bg-header-pattern bg-cover bg-no-repeat p-6 rounded-lg flex flex-col justify-end items-start">
-            {user ? (
-              <ProfileModal logout={logout} user={user} />
-            ) : (
+    <main className="grid grid-cols-1 lg:grid-cols-body gap-x-10 gap-y-0 md:gap-y-5 lg:gap-y-0 md:px-5 md:py-16 w-full mx-auto md:max-w-4xl lg:max-w-5xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 lg:block">
+        <div className="w-full bg-header-pattern bg-cover bg-no-repeat p-4 md:p-6 md:rounded-lg flex flex-row-reverse md:flex-col justify-between md:justify-end items-center md:items-start">
+          {user ? (
+            <ProfileModal logout={logout} user={user} />
+          ) : (
+            <div className="flex items-center">
               <Link to="/auth" className="text-white font-bold">
                 <i className="fas fa-sign-in-alt mr-2"></i> Log In
               </Link>
-            )}
-            <h1 className="text-white font-bold tracking-wide mt-16">
+              <button
+                className="inline-block md:hidden"
+                onClick={() => {
+                  setIsOpen(!isOpen);
+                }}
+              >
+                {isOpen ? (
+                  <i className="fas fa-times text-white text-2xl ml-5"></i>
+                ) : (
+                  <i className="fas fa-bars text-white text-2xl ml-4"></i>
+                )}
+              </button>
+            </div>
+          )}
+          <div>
+            <h1 className="text-white font-bold tracking-wide md:mt-16">
               CODINGSPACE
             </h1>
             <p className="text-white text-sm tracking-wide">Feedback Board</p>
           </div>
+        </div>
+        <div className="hidden md:grid grid-cols-2 gap-x-4 lg:block">
           <FilterFeedbacks search={search} />
           <Roadmap />
         </div>
-        <div>
-          <FeedbackHeader
-            openForm={openForm}
-            setOpenForm={setOpenForm}
-            headerName="Suggestions"
-            btnName="Add Feedback"
-            handleKeyPress={handleKeyPress}
-            setSearch={setSearch}
-            search={search}
-          />
-          <FeedbackList />
-        </div>
+      </div>
+      <div className="relative">
+        <FeedbackHeader
+          openForm={openForm}
+          setOpenForm={setOpenForm}
+          headerName="Suggestions"
+          btnName="Add Feedback"
+          handleKeyPress={handleKeyPress}
+          setSearch={setSearch}
+          search={search}
+        />
+        <FeedbackList />
+        <Sidebar isOpen={isOpen} />
       </div>
     </main>
   );

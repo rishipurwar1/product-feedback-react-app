@@ -9,6 +9,7 @@ import { signin, signup } from "../../actions/auth";
 import { v4 as uuidv4 } from "uuid";
 import ErrorMessage from "../helpers/ErrorMessage";
 import loader from "../../assets/imgs/loader.svg";
+import PageHeader from "../helpers/PageHeader";
 
 const AuthForm = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -48,7 +49,7 @@ const AuthForm = () => {
   };
 
   return (
-    <section className="col-start-1 col-end-2 sm:mx-0 md:my-auto h-screen self-center">
+    <section className="mx-auto w-full max-w-md my-16 px-2 sm:px-5">
       <Helmet>
         <title>{isLogin ? "Log In Form" : "Sign Up Form"}</title>
         <meta
@@ -56,7 +57,8 @@ const AuthForm = () => {
           content="feedback react app for our codingspace opensource project"
         />
       </Helmet>
-      <div className=" w-full max-w-md bg-white mt-16 px-6 py-8 rounded-md shadow-md mx-auto">
+      <PageHeader />
+      <div className=" w-full max-w-md bg-white mt-5 px-6 py-8 rounded-md shadow-md mx-auto">
         <FormProvider {...formMethods}>
           <form className="" onSubmit={handleSubmit(onSubmit)}>
             <div className="w-full flex justify-around mb-2">

@@ -63,7 +63,7 @@ const App = () => {
             content="feedback react app for our codingspace opensource project"
           />
         </Helmet>
-        <div className="App grid md:grid-cols-1 grid-rows-mobile md:grid-rows-1 gap-16 md:gap-12 font-display bg-secondary-light">
+        <div className="font-display bg-secondary-light">
           <Switch>
             <Route exact path="/">
               <Redirect to="/feedbacks" />

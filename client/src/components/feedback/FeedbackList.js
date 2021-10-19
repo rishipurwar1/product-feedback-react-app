@@ -8,7 +8,7 @@ const FeedbackList = () => {
   const feedbacks = useSelector((state) => state.feedbacks);
 
   return (
-    <div>
+    <div className="px-2 sm:px-5 md: pb-5 md:px-0">
       <Helmet>
         <title>{`${feedbacks.length} Suggestions - CODINGSPACE Feedback Board`}</title>
         <meta

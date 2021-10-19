@@ -7,6 +7,7 @@ import CommentSection from "./CommentSection";
 import LoginCard from "../helpers/LoginCard";
 import Button from "../helpers/Button";
 import ActionModal from "../helpers/ActionModal";
+import PageHeader from "../helpers/PageHeader";
 
 const FeedbackDetail = () => {
   const { id } = useParams();
@@ -21,7 +22,7 @@ const FeedbackDetail = () => {
   console.log(feedback);
   if (feedback.length > 0) {
     return (
-      <div className="row-start-2 row-end-3 col-start-1 col-end-2 mx-auto w-3/5">
+      <div className="mt-16 mx-auto px-2 sm:px-5 max-w-4xl lg:w-3/5">
         <Helmet>
           <title>{feedback[0].title}</title>
           <meta
@@ -30,10 +31,7 @@ const FeedbackDetail = () => {
           />
         </Helmet>
         <div className="flex justify-between">
-          <Link to="/" className="text-secondary-dark text-sm font-bold">
-            <i className="fas fa-angle-left text-tertiary-dark"></i>&nbsp;&nbsp;
-            Go back
-          </Link>
+          <PageHeader />
           {user?.result?._id === feedback[0]?.creator ? (
             <div>
               <Button

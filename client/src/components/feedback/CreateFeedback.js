@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { createFeedback, updateFeedback } from "../../actions/feedbacks";
 import iconNewFeedback from "../../assets/imgs/icon-new-feedback.svg";
@@ -9,6 +9,7 @@ import loader from "../../assets/imgs/loader.svg";
 import Input from "../authForm/Input";
 import Label from "../authForm/Label";
 import Button from "../helpers/Button";
+import PageHeader from "../helpers/PageHeader";
 
 const categories = [
   { label: "Feature", value: "feature" },
@@ -50,7 +51,7 @@ const CreateFeedback = ({ feedback }) => {
     }
   };
   return (
-    <div className="row-start-2 row-end-3 col-start-1 col-end-2 mx-auto w-full max-w-xl my-10">
+    <div className="mx-auto w-full max-w-xl my-16 px-2 sm:px-5">
       <Helmet>
         <title>Create New Feedback</title>
         <meta
@@ -58,12 +59,7 @@ const CreateFeedback = ({ feedback }) => {
           content="create a new feedback or give your suggestion"
         />
       </Helmet>
-      <div className="flex justify-between">
-        <Link to="/" className="text-secondary-dark text-sm font-bold">
-          <i className="fas fa-angle-left text-tertiary-dark"></i>&nbsp;&nbsp;
-          Go back
-        </Link>
-      </div>
+      <PageHeader />
       <div className="bg-white px-6 py-8 rounded-lg shadow-sm mx-auto mt-16 relative">
         <FormProvider {...formMethods}>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -120,7 +116,7 @@ const CreateFeedback = ({ feedback }) => {
                 {...register("description", { required: true })}
               ></textarea>
             </div>
-            <div className="flex justify-end mt-8">
+            <div className="flex flex-col-reverse md:flex-row md:justify-end mt-8">
               <Button
                 type="button"
                 btnText="Cancel"
@@ -130,7 +126,7 @@ const CreateFeedback = ({ feedback }) => {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className={`px-5 py-3 text-sm rounded-lg ml-2 bg-neutral text-white ${
+                className={`px-5 py-3 text-sm rounded-lg mb-4 md:mb-0 md:ml-2 bg-neutral text-white ${
                   isSubmitting && "bg-btn-hover"
                 } hover:bg-btn-hover`}
               >

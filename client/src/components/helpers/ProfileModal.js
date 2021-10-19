@@ -27,7 +27,7 @@ const ProfileModal = ({ logout, user }) => {
       )}
       {isOpen && (
         <ul
-          className="absolute -bottom-12 p-2 mt-2 space-y-2 bg-white rounded-md shadow-md"
+          className="absolute -bottom-12 p-2 mt-2 space-y-2 bg-white rounded-md shadow-md z-50"
           aria-label="sub-menu"
         >
           <li>
