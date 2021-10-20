@@ -28,7 +28,8 @@ const signin = async (req, res) => {
 };
 
 const signup = async (req, res) => {
-  const { name, username, photo, email, password } = req.body;
+  const { name, username, profilePhoto, email, password } = req.body;
+  console.log(req.body);
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser)
@@ -39,7 +40,7 @@ const signup = async (req, res) => {
       name,
       username,
       email,
-      photo,
+      profilePhoto,
       password: hashedPassword,
     });
     const token = jwt.sign(

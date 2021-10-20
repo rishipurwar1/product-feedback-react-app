@@ -20,7 +20,7 @@ const FeedbackDetail = () => {
   );
   if (feedback.length > 0) {
     return (
-      <div className="mt-16 mx-auto px-5 max-w-4xl lg:w-3/5">
+      <div className="my-16 mx-auto px-5 max-w-4xl lg:w-3/5">
         <Helmet>
           <title>{feedback[0].title}</title>
           <meta

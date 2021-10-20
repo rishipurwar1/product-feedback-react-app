@@ -13,7 +13,12 @@ const CommentSection = ({ data }) => {
 
   const handleClick = async () => {
     setIsSubmitting(true);
-    const finalComment = `${user.result.name}: ${comment}`;
+    // const finalComment = `${user.result.name}: ${comment}`;
+    const finalComment = {
+      profilePhoto: user?.result?.profilePhoto,
+      author: user?.result?.name,
+      text: comment,
+    };
     const newComments = await dispatch(commentFeedback(finalComment, data._id));
     setComments(newComments);
     setComment("");
@@ -26,8 +31,7 @@ const CommentSection = ({ data }) => {
           {comments.length} Comments
         </h2>
         <div>
-          {comments.map((c, i) => {
-            const comment = c.split(":");
+          {comments.map((comment, i) => {
             return (
               <div
                 key={i}
@@ -36,12 +40,16 @@ const CommentSection = ({ data }) => {
                 }`}
               >
                 <div className="flex items-center">
-                  <Avatar name={comment[0]} size={40} round className="mr-6" />
+                  <img
+                    src={comment.profilePhoto}
+                    alt="avatar"
+                    className="rounded h-10 block overflow-hidden focus:outline-none cursor-pointer mr-6"
+                  />
                   <p className="text-sm text-primary-dark font-semibold">
-                    {comment[0]}
+                    {comment.author}
                   </p>
                 </div>
-                <p className="ml-16 mt-2 text-secondary-dark">{comment[1]}</p>
+                <p className="ml-16 mt-2 text-secondary-dark">{comment.text}</p>
               </div>
             );
           })}

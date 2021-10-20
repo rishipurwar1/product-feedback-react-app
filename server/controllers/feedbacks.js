@@ -85,10 +85,11 @@ const deleteFeedback = (req, res) => {
 const commentFeedback = async (req, res) => {
   const { id } = req.params;
   const { value } = req.body;
-
+  console.log(value);
   const feedback = await Feedback.findById(id);
 
   feedback.comments.push(value);
+  console.log(feedback);
   const updatedFeedback = await Feedback.findByIdAndUpdate(id, feedback, {
     new: true,
   });
