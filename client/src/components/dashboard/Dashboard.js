@@ -55,8 +55,8 @@ const Dashboard = () => {
   }, [location]);
 
   return (
-    <main className="grid grid-cols-1 lg:grid-cols-body gap-x-10 gap-y-0 md:gap-y-5 lg:gap-y-0 md:px-5 md:py-16 w-full mx-auto md:max-w-4xl lg:max-w-5xl">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-x-4 lg:block">
+    <main className="grid grid-cols-1 lg:grid-cols-body gap-x-10 gap-y-0 md:gap-y-5 lg:gap-y-0 md:px-5 md:py-16 w-full mx-auto md:max-w-4xl lg:max-w-5xl overflow-x-hidden">
+      <div className="grid grid-cols-1 md:grid-cols-header gap-x-4 lg:block">
         <div className="w-full bg-header-pattern bg-cover bg-no-repeat p-4 md:p-6 md:rounded-lg flex flex-row-reverse md:flex-col justify-between md:justify-end items-center md:items-start">
           {user ? (
             <ProfileModal logout={logout} user={user} />

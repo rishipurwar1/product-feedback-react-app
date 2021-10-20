@@ -9,7 +9,6 @@ const Profile = ({ name, username, createdAt }) => {
         name={name}
         size="40"
         round={true}
-        // onClick={() => setIsOpen(!isOpen)}
         className="block overflow-hidden focus:outline-none cursor-pointer"
       />
       <div className="ml-2">

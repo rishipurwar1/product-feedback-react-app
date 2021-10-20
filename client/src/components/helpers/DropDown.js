@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-// import { filterInvoices, getInvoices } from "../../actions/invoices";
 
 const options = [
   { name: "Most Upvotes", value: "mostUpvotes" },
@@ -10,7 +8,6 @@ const options = [
 ];
 
 const Dropdown = () => {
-  const dispatch = useDispatch();
   const [showFilter, setShowFilter] = useState(false);
 
   const handleOnChange = (position) => {

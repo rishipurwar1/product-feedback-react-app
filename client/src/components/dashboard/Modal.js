@@ -1,12 +1,6 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { deleteExperience } from "../../actions/experiences";
-import { useHistory } from "react-router-dom";
 
-const Modal = ({ setShowModal, experienceId, text }) => {
-  console.log(experienceId);
-  const history = useHistory();
-  const dispatch = useDispatch();
+const Modal = ({ setShowModal, text }) => {
   return (
     <>
       <div

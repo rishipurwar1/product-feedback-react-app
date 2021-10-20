@@ -10146,6 +10146,10 @@ video {
   grid-template-columns: 255px 1fr;
 }
 
+.grid-cols-header{
+  grid-template-columns: 1fr 2fr;
+}
+
 .grid-cols-card{
   grid-template-columns: auto 1fr auto;
 }
@@ -41904,6 +41908,10 @@ video {
     grid-template-columns: 255px 1fr;
   }
 
+  .sm\:grid-cols-header{
+    grid-template-columns: 1fr 2fr;
+  }
+
   .sm\:grid-cols-card{
     grid-template-columns: auto 1fr auto;
   }
@@ -73648,6 +73656,10 @@ video {
 
   .md\:grid-cols-body{
     grid-template-columns: 255px 1fr;
+  }
+
+  .md\:grid-cols-header{
+    grid-template-columns: 1fr 2fr;
   }
 
   .md\:grid-cols-card{
@@ -105396,6 +105408,10 @@ video {
     grid-template-columns: 255px 1fr;
   }
 
+  .lg\:grid-cols-header{
+    grid-template-columns: 1fr 2fr;
+  }
+
   .lg\:grid-cols-card{
     grid-template-columns: auto 1fr auto;
   }
@@ -137142,6 +137158,10 @@ video {
     grid-template-columns: 255px 1fr;
   }
 
+  .xl\:grid-cols-header{
+    grid-template-columns: 1fr 2fr;
+  }
+
   .xl\:grid-cols-card{
     grid-template-columns: auto 1fr auto;
   }
@@ -168886,6 +168906,10 @@ video {
 
   .\32xl\:grid-cols-body{
     grid-template-columns: 255px 1fr;
+  }
+
+  .\32xl\:grid-cols-header{
+    grid-template-columns: 1fr 2fr;
   }
 
   .\32xl\:grid-cols-card{
