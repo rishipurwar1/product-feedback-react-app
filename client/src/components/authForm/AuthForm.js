@@ -6,12 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Helmet } from "react-helmet";
 import { useHistory } from "react-router";
 import { signin, signup } from "../../actions/auth";
-import { v4 as uuidv4 } from "uuid";
 import ErrorMessage from "../helpers/ErrorMessage";
 import loader from "../../assets/imgs/loader.svg";
 import PageHeader from "../helpers/PageHeader";
+import AvataaarsScroll from "../helpers/AvataaarsScroll";
 
 const AuthForm = () => {
+  const [selected, setSelected] = useState("avatar-one");
   const [isLogin, setIsLogin] = useState(true);
   const formMethods = useForm();
   const {
@@ -40,7 +41,7 @@ const AuthForm = () => {
           {
             ...data,
             username: data.email.match(/^([^@]*)@/)[1],
-            photo: `https://avatars.dicebear.com/api/avataaars/${uuidv4()}.svg`,
+            profilePhoto: `https://avatars.dicebear.com/api/avataaars/${selected}.svg`,
           },
           history
         )
@@ -100,6 +101,15 @@ const AuthForm = () => {
                 <Label labelName="Password" />
                 <Input inputName="password" type="password" />
               </div>
+              {!isLogin && (
+                <div>
+                  <Label labelName="Select your avataaar" />
+                  <AvataaarsScroll
+                    selected={selected}
+                    setSelected={setSelected}
+                  />
+                </div>
+              )}
             </div>
             <div className="text-center">
               <button

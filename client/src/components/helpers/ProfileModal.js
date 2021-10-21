@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Avatar from "react-avatar";
 
 const ProfileModal = ({ logout, user }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,12 +9,11 @@ const ProfileModal = ({ logout, user }) => {
     <div className="relative block">
       {user && (
         <div className="flex items-center mb-2">
-          <Avatar
-            name={user.result.name}
-            size="40"
-            round={true}
+          <img
+            src={user.result.profilePhoto}
+            alt="avatar"
+            className="rounded h-10 block overflow-hidden focus:outline-none cursor-pointer"
             onClick={() => setIsOpen(!isOpen)}
-            className="block overflow-hidden focus:outline-none cursor-pointer"
           />
           <div className="ml-2">
             <p className="text-sm text-white">{user.result.name}</p>

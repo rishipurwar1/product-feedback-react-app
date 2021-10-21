@@ -44,6 +44,7 @@ const CreateFeedback = ({ feedback }) => {
           ...data,
           status: "suggestion",
           name: user?.result?.name,
+          profilePhoto: user?.result?.profilePhoto,
         })
       );
       history.push("/feedbacks");

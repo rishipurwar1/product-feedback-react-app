@@ -18,7 +18,7 @@ const Upvote = ({ upvotes, id, block }) => {
             block ? "block" : "inline pl-2"
           } text-black font-semibold text-sm`}
         >
-          {upvotes}
+          {upvotes.length}
         </small>
       </button>
     </div>

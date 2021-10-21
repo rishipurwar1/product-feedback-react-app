@@ -18,7 +18,11 @@ const Card = ({ data, disable = false }) => {
         to={`/feedbacks/${data._id}`}
         className={`${disable ? "pointer-events-none" : null} text-left`}
       >
-        <Profile name={data.name} createdAt={data.createdAt} />
+        <Profile
+          name={data.name}
+          profilePhoto={data.profilePhoto}
+          createdAt={data.createdAt}
+        />
         <p className="text-lg text-primary-dark font-semibold">{data.title}</p>
         <p className="text-secondary-dark text-sm pt-2 pb-3">
           {disable
