@@ -1,4 +1,5 @@
 {
+  "homepage": "https://codingspace-feedback-app.vercel.app",
   "name": "client",
   "version": "0.1.0",
   "private": true,

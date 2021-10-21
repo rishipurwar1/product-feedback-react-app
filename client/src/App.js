@@ -55,7 +55,7 @@ const App = () => {
           },
         }}
       />
-      <Router>
+      <Router basename="/">
         <Helmet>
           <title>CODINGSPACE Feedback App</title>
           <meta
