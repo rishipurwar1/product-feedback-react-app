@@ -1,18 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { ScrollMenu } from "react-horizontal-scrolling-menu";
-
-// list of items
-const list = [
-  { name: "avatar-one" },
-  { name: "avatar-two" },
-  { name: "avatar-three" },
-  { name: "avatar-four" },
-  { name: "avatar-five" },
-  { name: "avatars-six" },
-  { name: "avatar-seven" },
-  { name: "avatar-eight" },
-  { name: "avatar-nine" },
-];
+import { avataaars } from "../../utils/avaatars";
 
 const Arrow = ({ text, className }) => {
   return <div className={className}>{text}</div>;
@@ -35,7 +23,7 @@ const AvataaarsScroll = ({ setSelected, selected }) => {
       onSelect={onSelect}
       // className="overflow-x-hidden"
     >
-      {list.map((item) => (
+      {avataaars.map((item) => (
         <div
           className={`p-3 mt-2 select-none cursor-pointer rounded-full w-20 border-2 ${
             item.name === selected ? "border-purple-500" : "border-transparent"
