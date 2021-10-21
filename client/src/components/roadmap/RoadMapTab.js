@@ -112,7 +112,7 @@ const RoadMapTab = ({
                         </p>
                         <CategoryTag btnName={item.category} />
                         <div className="flex justify-between">
-                          <Upvote upvotes={item.upvotes} />
+                          <Upvote upvotes={item.upvotes.length} />
                           <CommentIcon comments={item.comments.length} />
                         </div>
                       </Link>
@@ -132,6 +132,7 @@ const RoadMapTab = ({
                 {inProgressFeatures.map((item) => {
                   return (
                     <li
+                      key={item._id}
                       className={`p-4 mb-4 bg-white rounded-lg border-t-4 cursor-pointer border-status-in-progress`}
                     >
                       <Link to={`/feedbacks/${item._id}`}>
@@ -143,7 +144,7 @@ const RoadMapTab = ({
                         </p>
                         <CategoryTag btnName={item.category} />
                         <div className="flex justify-between">
-                          <Upvote upvotes={item.upvotes} />
+                          <Upvote upvotes={item.upvotes.length} />
                           <CommentIcon comments={item.comments.length} />
                         </div>
                       </Link>
@@ -175,7 +176,7 @@ const RoadMapTab = ({
                         </p>
                         <CategoryTag btnName={item.category} />
                         <div className="flex justify-between">
-                          <Upvote upvotes={item.upvotes} />
+                          <Upvote upvotes={item.upvotes.length} />
                           <CommentIcon comments={item.comments.length} />
                         </div>
                       </Link>
