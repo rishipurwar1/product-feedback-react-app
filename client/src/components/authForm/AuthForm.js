@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { Helmet } from "react-helmet";
 import { useHistory } from "react-router";
 import { signin, signup } from "../../actions/auth";
-import { v4 as uuidv4 } from "uuid";
 import ErrorMessage from "../helpers/ErrorMessage";
 import loader from "../../assets/imgs/loader.svg";
 import PageHeader from "../helpers/PageHeader";

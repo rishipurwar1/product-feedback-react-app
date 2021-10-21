@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Avatar from "react-avatar";
 import { useDispatch } from "react-redux";
 import { commentFeedback } from "../../actions/feedbacks";
 import loader from "../../assets/imgs/loader.svg";

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
-import Avatar from "react-avatar";
 
 const ProfileModal = ({ logout, user }) => {
   const [isOpen, setIsOpen] = useState(false);

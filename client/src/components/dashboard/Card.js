@@ -5,7 +5,6 @@ import Upvote from "../helpers/Upvote";
 import CommentIcon from "../helpers/CommentIcon";
 
 const Card = ({ data, disable = false }) => {
-  console.log(data);
   return (
     <div
       className={`w-full rounded-lg mt-5 bg-white grid grid-cols-1 md:grid-cols-card place-content-center gap-4 md:gap-10 p-6 ${
