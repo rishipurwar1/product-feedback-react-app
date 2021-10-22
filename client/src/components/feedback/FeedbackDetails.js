@@ -49,7 +49,6 @@ const FeedbackDetail = () => {
         </div>
         <Card data={feedback[0]} disable />
         <CommentSection data={feedback[0]} />
-        {!user?.result?.name && <LoginCard />}
         {showModal && (
           <ActionModal
             text="Are you sure you want to delete your interview experience?"

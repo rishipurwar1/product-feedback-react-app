@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { commentFeedback } from "../../actions/feedbacks";
 import loader from "../../assets/imgs/loader.svg";
+import LoginCard from "../helpers/LoginCard";
 
 const CommentSection = ({ data }) => {
   const [comments, setComments] = useState(data?.comments);
@@ -54,9 +55,9 @@ const CommentSection = ({ data }) => {
           })}
         </div>
       </div>
-      {user?.result?.name && (
+      {user?.result?.name ? (
         <div className="w-full max-w-4xl rounded-lg mt-5 bg-white shadow-sm flex flex-col p-5">
-          <div className="">
+          <div>
             <label
               htmlFor="comment"
               className="text-xl text-primary-dark font-semibold block"
@@ -88,6 +89,8 @@ const CommentSection = ({ data }) => {
             )}
           </button>
         </div>
+      ) : (
+        <LoginCard />
       )}
     </>
   );

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import iconSuggestion from "../../assets/imgs/icon-suggestions.svg";
 import iconPlus from "../../assets/imgs/icon-plus.svg";
-import Modal from "../helpers/Modal";
+import toast from "react-hot-toast";
 
 const FeedbackHeader = ({
   headerName,
@@ -13,14 +13,13 @@ const FeedbackHeader = ({
   handleKeyPress,
 }) => {
   const history = useHistory();
-  const [showModal, setShowModal] = useState(false);
   const feedbacks = useSelector((state) => state.feedbacks);
   const user = JSON.parse(localStorage.getItem("profile"));
   const handleClick = () => {
     if (user?.result?.name) {
       history.push("/create");
     } else {
-      setShowModal(!showModal);
+      toast.error("You're not logged in!");
     }
   };
   return (
@@ -47,13 +46,6 @@ const FeedbackHeader = ({
           {btnName}
         </button>
       </div>
-
-      {showModal && (
-        <Modal
-          text="Please Log In first to add a feedback"
-          setShowModal={setShowModal}
-        />
-      )}
     </div>
   );
 };
