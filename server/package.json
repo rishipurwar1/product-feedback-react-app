@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "This is the server for the product feedback react app",
   "main": "app.js",
+  "engines": {
+    "node": "14.x"
+  },
   "scripts": {
     "start": "node app.js",
     "app": "nodemon app.js",
