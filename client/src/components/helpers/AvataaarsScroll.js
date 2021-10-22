@@ -12,7 +12,6 @@ const ArrowRight = Arrow({ text: ">", className: "text-black text-md" });
 const AvataaarsScroll = ({ setSelected, selected }) => {
   const onSelect = (key) => {
     setSelected(key);
-    console.log(key);
   };
 
   return (
@@ -21,7 +20,7 @@ const AvataaarsScroll = ({ setSelected, selected }) => {
       arrowRight={ArrowRight}
       selected={selected}
       onSelect={onSelect}
-      // className="overflow-x-hidden"
+      className="overflow-x-hidden"
     >
       {avataaars.map((item) => (
         <div

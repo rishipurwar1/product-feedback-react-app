@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet";
 import RoadmapHeader from "./RoadmapHeader";
 import RoadMapTab from "./RoadMapTab";
 import DragDrop from "./DragDrop";
+import EmptyState from "../feedback/EmptyState";
 
 const columnsFromBackend = {
   planned: {
@@ -48,29 +49,31 @@ const Roadmap = () => {
 
   const [columns, setColumns] = useState(columnsFromBackend);
 
-  if (feedbacks.length > 0) {
-    return (
-      <div className="mx-auto md:mt-16 max-w-5xl md:px-5">
-        <Helmet>
-          <title>Roadmap - Kanban Board</title>
-          <meta
-            name="description"
-            content="roadmap for our codingspace opensource project"
-          />
-        </Helmet>
-        <RoadmapHeader />
-        <RoadMapTab
-          plannedFeatures={plannedFeatures}
-          inProgressFeatures={inProgressFeatures}
-          liveFeatures={liveFeatures}
-          column={columns}
+  return (
+    <div className="mx-auto md:mt-16 max-w-5xl md:px-5">
+      <Helmet>
+        <title>Roadmap - Kanban Board</title>
+        <meta
+          name="description"
+          content="roadmap for our codingspace opensource project"
         />
-        <DragDrop columns={columns} setColumns={setColumns} />
-      </div>
-    );
-  } else {
-    return <h1>Loading...</h1>;
-  }
+      </Helmet>
+      <RoadmapHeader />
+      {feedbacks.length > 0 ? (
+        <>
+          <RoadMapTab
+            plannedFeatures={plannedFeatures}
+            inProgressFeatures={inProgressFeatures}
+            liveFeatures={liveFeatures}
+            column={columns}
+          />
+          <DragDrop columns={columns} setColumns={setColumns} />
+        </>
+      ) : (
+        <EmptyState />
+      )}
+    </div>
+  );
 };
 
 export default Roadmap;
