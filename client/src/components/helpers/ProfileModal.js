@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import { useHistory } from "react-router-dom";
 
 const ProfileModal = ({ logout, user }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const history = useHistory();
 
   return (
     <div className="relative block">
@@ -33,7 +31,6 @@ const ProfileModal = ({ logout, user }) => {
               onClick={() => {
                 logout();
                 setIsOpen(!isOpen);
-                history.push("/auth");
               }}
               className="block px-2 py-1 text-primary-dark"
             >
