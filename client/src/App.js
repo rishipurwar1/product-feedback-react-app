@@ -20,6 +20,7 @@ import Roadmap from "./components/roadmap/Roadmap";
 
 const App = () => {
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   useEffect(() => {
     dispatch(getFeedbacks());
@@ -32,14 +33,12 @@ const App = () => {
         containerClassName=""
         containerStyle={{}}
         toastOptions={{
-          // Define default options
           className: "",
           duration: 5000,
           style: {
             background: "#ffffff",
             color: "#3A4374",
           },
-          // Default options for specific types
           success: {
             duration: 3000,
             iconTheme: {
@@ -78,14 +77,14 @@ const App = () => {
             <Route path="/feedbacks/:id">
               <FeedbackDetail />
             </Route>
-            <Route path="/auth">
-              <AuthForm />
+            <Route exact path="/auth">
+              {!user ? <AuthForm /> : <Redirect to="/feedbacks" />}
             </Route>
             <Route path="/create">
-              <CreateFeedback />
+              {!user ? <Redirect to="/feedbacks" /> : <CreateFeedback />}
             </Route>
             <Route path="/edit/:id">
-              <UpdateFeedback />
+              {!user ? <Redirect to="/feedbacks" /> : <UpdateFeedback />}
             </Route>
             <Route path="/roadmap">
               <Roadmap />
