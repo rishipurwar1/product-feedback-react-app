@@ -6,7 +6,7 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { Helmet } from "react-helmet";
@@ -20,7 +20,7 @@ import Roadmap from "./components/roadmap/Roadmap";
 
 const App = () => {
   const dispatch = useDispatch();
-  const user = JSON.parse(localStorage.getItem("profile"));
+  const user = useSelector((state) => state.auth.authData);
 
   useEffect(() => {
     dispatch(getFeedbacks());
