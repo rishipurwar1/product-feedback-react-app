@@ -1,3 +1,4 @@
+import React from "react";
 import "./App.css";
 import "./assets/output.css";
 import {
@@ -7,16 +8,22 @@ import {
   Redirect,
 } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { Helmet } from "react-helmet";
 import { getFeedbacks } from "./actions/feedbacks";
-import Dashboard from "./components/dashboard/Dashboard";
-import FeedbackDetail from "./components/feedback/FeedbackDetails";
-import AuthForm from "./components/authForm/AuthForm";
-import CreateFeedback from "./components/feedback/CreateFeedback";
-import UpdateFeedback from "./components/feedback/UpdateFeedback";
-import Roadmap from "./components/roadmap/Roadmap";
+const Dashboard = React.lazy(() => import("./components/dashboard/Dashboard"));
+const FeedbackDetail = React.lazy(() =>
+  import("./components/feedback/FeedbackDetails")
+);
+const AuthForm = React.lazy(() => import("./components/authForm/AuthForm"));
+const CreateFeedback = React.lazy(() =>
+  import("./components/feedback/CreateFeedback")
+);
+const UpdateFeedback = React.lazy(() =>
+  import("./components/feedback/UpdateFeedback")
+);
+const Roadmap = React.lazy(() => import("./components/roadmap/Roadmap"));
 
 const App = () => {
   const dispatch = useDispatch();
@@ -64,31 +71,33 @@ const App = () => {
         </Helmet>
         <div className="font-display bg-secondary-light">
           <Switch>
-            <Route exact path="/">
-              <Redirect to="/feedbacks" />
-              <Dashboard />
-            </Route>
-            <Route exact path="/feedbacks">
-              <Dashboard />
-            </Route>
-            <Route exact path="/feedbacks/search">
-              <Dashboard />
-            </Route>
-            <Route path="/feedbacks/:id">
-              <FeedbackDetail />
-            </Route>
-            <Route exact path="/auth">
-              {!user ? <AuthForm /> : <Redirect to="/feedbacks" />}
-            </Route>
-            <Route path="/create">
-              {!user ? <Redirect to="/feedbacks" /> : <CreateFeedback />}
-            </Route>
-            <Route path="/edit/:id">
-              {!user ? <Redirect to="/feedbacks" /> : <UpdateFeedback />}
-            </Route>
-            <Route path="/roadmap">
-              <Roadmap />
-            </Route>
+            <Suspense fallback={<div>Loading..</div>}>
+              <Route exact path="/">
+                <Redirect to="/feedbacks" />
+                <Dashboard />
+              </Route>
+              <Route exact path="/feedbacks">
+                <Dashboard />
+              </Route>
+              <Route exact path="/feedbacks/search">
+                <Dashboard />
+              </Route>
+              <Route path="/feedbacks/:id">
+                <FeedbackDetail />
+              </Route>
+              <Route exact path="/auth">
+                {!user ? <AuthForm /> : <Redirect to="/feedbacks" />}
+              </Route>
+              <Route path="/create">
+                {!user ? <Redirect to="/feedbacks" /> : <CreateFeedback />}
+              </Route>
+              <Route path="/edit/:id">
+                {!user ? <Redirect to="/feedbacks" /> : <UpdateFeedback />}
+              </Route>
+              <Route path="/roadmap">
+                <Roadmap />
+              </Route>
+            </Suspense>
           </Switch>
         </div>
       </Router>
