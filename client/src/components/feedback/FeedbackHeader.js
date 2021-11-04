@@ -27,7 +27,6 @@ const FeedbackHeader = ({
       <div className="hidden md:flex md:items-center">
         <img src={iconSuggestion} className="mr-4" alt="suggestions" />
         <h1 className="text-white font-bold text-xl">{`${feedbacks.length} ${headerName}`}</h1>
-        {/* <small>Sort By:</small> */}
       </div>
       <div className="w-full md:w-max">
         <input
