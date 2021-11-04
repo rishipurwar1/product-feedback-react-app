@@ -86,7 +86,11 @@ const App = () => {
                 <FeedbackDetail />
               </Route>
               <Route exact path="/auth">
-                {!user ? <AuthForm /> : <Redirect to="/feedbacks" />}
+                {user?.message || !user ? (
+                  <AuthForm />
+                ) : (
+                  <Redirect to="/feedbacks" />
+                )}
               </Route>
               <Route path="/create">
                 {!user ? <Redirect to="/feedbacks" /> : <CreateFeedback />}
