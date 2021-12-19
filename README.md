@@ -6,11 +6,11 @@ CodingSpace Feedback App is an Open Source platform where everyone can give thei
 
 ### Features
 
-✅ Create, read, update, and delete product feedback requests
-✅ Receive form validations when trying to create/edit feedback requests
-✅ Filter suggestions by category
-✅Add comments to a product feedback request
-✅ Upvote product feedback requests
+✅ Create, read, update, and delete product feedback requests\
+✅ Receive form validations when trying to create/edit feedback requests\
+✅ Filter suggestions by category\
+✅Add comments to a product feedback request\
+✅ Upvote product feedback requests\
 
 ## 👨‍💻 Demo
 
