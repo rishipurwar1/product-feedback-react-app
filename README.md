@@ -4,7 +4,7 @@ CodingSpace Feedback App is an Open Source platform where everyone can give thei
 
 ![Homepage](client/src/assets/imgs/photon-one.png)
 
-### Features
+## Features
 
 ✅ Create, read, update, and delete product feedback requests\
 ✅ Receive form validations when trying to create/edit feedback requests\
