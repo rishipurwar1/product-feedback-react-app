@@ -20,7 +20,7 @@ const Dashboard = () => {
   const history = useHistory();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
 
-  const searchExperiences = () => {
+  const searchFeedbacks = () => {
     if (search.trim()) {
       dispatch(getFeedbacksBySearch(search));
       history.push(`/feedbacks/search?query=${search || "none"}`);
@@ -31,7 +31,7 @@ const Dashboard = () => {
   };
   const handleKeyPress = (e) => {
     if (e.keyCode === 13) {
-      searchExperiences();
+      searchFeedbacks();
     }
   };
 
