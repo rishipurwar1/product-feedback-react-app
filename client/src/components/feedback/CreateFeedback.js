@@ -3,7 +3,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { createFeedback, updateFeedback } from "../../actions/feedbacks";
+import { createFeedback } from "../../actions/feedbacks";
 import iconNewFeedback from "../../assets/imgs/icon-new-feedback.svg";
 import loader from "../../assets/imgs/loader.svg";
 import Input from "../authForm/Input";
@@ -19,36 +19,27 @@ const categories = [
   { label: "UX", value: "ux" },
 ];
 
-const CreateFeedback = ({ feedback }) => {
+const CreateFeedback = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const formMethods = useForm();
   const {
     handleSubmit,
     register,
-    reset,
     formState: { errors, isSubmitting },
   } = formMethods;
   // get user profile from local storage
   const user = JSON.parse(localStorage.getItem("profile"));
   const onSubmit = async (data) => {
-    if (feedback) {
-      await dispatch(updateFeedback(feedback._id, data));
-      history.push("/feedbacks");
-      reset("", {
-        keepValues: false,
-      });
-    } else {
-      await dispatch(
-        createFeedback({
-          ...data,
-          status: "suggestion",
-          name: user?.result?.name,
-          profilePhoto: user?.result?.profilePhoto,
-        })
-      );
-      history.push("/feedbacks");
-    }
+    await dispatch(
+      createFeedback({
+        ...data,
+        status: "suggestion",
+        name: user?.result?.name,
+        profilePhoto: user?.result?.profilePhoto,
+      })
+    );
+    history.push("/feedbacks");
   };
   return (
     <div className="mx-auto w-full max-w-xl my-16 px-2 sm:px-5">
