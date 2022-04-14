@@ -10,7 +10,7 @@ CodingSpace Feedback App is an Open Source platform where everyone can give thei
 ✅ Receive form validations when trying to create/edit feedback requests\
 ✅ Filter suggestions by category\
 ✅Add comments to a product feedback request\
-✅ Upvote product feedback requests\
+✅ Upvote product feedback requests
 
 ## 👨‍💻 Demo
 
@@ -27,3 +27,12 @@ Try out the website : [Product Feedback App](https://codingspace-feedback-app.ve
 ![NodeJs](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
 ![ExpressJs](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge)
 ![MongoDB](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
+
+
+## 🔑 Key Points and Steps I took to optimize the performance
+
+- Reduced the bundle size drastically by using code-splitting and lazy loading to improve the User Experience.
+- Used Redux to manage the state of the application.
+- Reduced unnecessary re-renders by keeping components state local.
+- Maintained structured readable code using MVC Pattern.
+- Used Axios to make the API calls from the frontend.
