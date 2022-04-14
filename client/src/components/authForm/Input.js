@@ -1,11 +1,10 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
-const Input = ({ inputName, readOnly, type, total, bgColor }) => {
+const Input = ({ inputName, type, bgColor }) => {
   const { register, formState: errors } = useFormContext();
   return (
     <input
-      {...(readOnly && { disabled: true, readOnly, value: total })}
       type={type}
       name={inputName}
       id={inputName}
