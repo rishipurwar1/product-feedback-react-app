@@ -10,7 +10,7 @@ API.interceptors.request.use((req) => {
   return req;
 });
 
-// experiences endpoints
+// feedbacks endpoints
 export const fetchFeedbacks = () => API.get("/feedbacks");
 export const filterFeedbacks = (query) =>
   API.get(`/feedbacks?category=${query}`);
