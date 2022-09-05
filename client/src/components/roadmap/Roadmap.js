@@ -6,7 +6,7 @@ import RoadMapTab from "./RoadMapTab";
 import DragDrop from "./DragDrop";
 import EmptyState from "../feedback/EmptyState";
 
-const columnsFromBackend = {
+const columnsData = {
   planned: {
     name: "Planned",
     subTitle: "Ideas prioritized for research",
@@ -27,7 +27,7 @@ const columnsFromBackend = {
 const Roadmap = () => {
   const feedbacks = useSelector((state) => state.feedbacks);
 
-  var plannedFeatures = [];
+  let plannedFeatures = [];
   let inProgressFeatures = [];
   let liveFeatures = [];
 
@@ -35,19 +35,19 @@ const Roadmap = () => {
     feedbacks.forEach((feedback) => {
       if (feedback.status === "planned") {
         plannedFeatures = [...plannedFeatures, feedback];
-        columnsFromBackend["planned"].items = plannedFeatures;
+        columnsData["planned"].items = plannedFeatures;
       } else if (feedback.status === "in-progress") {
         inProgressFeatures = [...inProgressFeatures, feedback];
-        columnsFromBackend["in-progress"].items = inProgressFeatures;
+        columnsData["in-progress"].items = inProgressFeatures;
       } else if (feedback.status === "live") {
         liveFeatures = [...liveFeatures, feedback];
-        columnsFromBackend["live"].items = liveFeatures;
+        columnsData["live"].items = liveFeatures;
       } else {
         return;
       }
     });
 
-  const [columns, setColumns] = useState(columnsFromBackend);
+  const [columns, setColumns] = useState(columnsData);
 
   return (
     <div className="mx-auto md:mt-16 max-w-5xl md:px-5">
