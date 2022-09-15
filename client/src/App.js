@@ -74,10 +74,13 @@ const App = () => {
             <Suspense fallback={<div>Loading..</div>}>
               <Route exact path="/">
                 <Redirect to="/feedbacks" />
-                <Dashboard />
               </Route>
               <Route exact path="/feedbacks">
-                <Dashboard />
+                {user?.message || !user ? (
+                  <Redirect to="/auth" />
+                ) : (
+                  <Dashboard />
+                )}
               </Route>
               <Route exact path="/feedbacks/search">
                 <Dashboard />
