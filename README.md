@@ -20,7 +20,7 @@ CodingSpace Feedback App is an Open Source platform where everyone can give thei
 
 Try out the website : [Product Feedback App](https://codingspace-feedback-app.vercel.app/feedbacks)
 
-Try out the API: [Product Feedback API](https://product-feedback-react-app-production.up.railway.app/feedbacks)
+Try out the API: [Product Feedback API](https://product-api.up.railway.app/feedbacks)
 
 ## 👨‍🔧 Tech Stack
 
