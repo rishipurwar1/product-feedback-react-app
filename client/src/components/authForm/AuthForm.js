@@ -41,10 +41,10 @@ const AuthForm = () => {
           {
             ...data,
             username: data.email.match(/^([^@]*)@/)[1],
-            profilePhoto: `https://avatars.dicebear.com/api/avataaars/${selected}.svg`,
+            profilePhoto: `https://api.dicebear.com/9.x/avataaars/svg?seed=${selected}`,
           },
-          history
-        )
+          history,
+        ),
       );
     }
   };

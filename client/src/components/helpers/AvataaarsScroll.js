@@ -31,7 +31,7 @@ const AvataaarsScroll = ({ setSelected, selected }) => {
           key={item.name}
         >
           <img
-            src={`https://avatars.dicebear.com/api/avataaars/${item.name}.svg`}
+            src={`https://api.dicebear.com/9.x/avataaars/svg?seed=${item.name}`}
             alt={item.name}
           />
         </div>
